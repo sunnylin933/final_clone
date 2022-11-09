@@ -458,7 +458,6 @@ GameObject:
   - component: {fileID: 1260347160}
   - component: {fileID: 1260347163}
   - component: {fileID: 1260347162}
-  - component: {fileID: 1260347161}
   m_Layer: 0
   m_Name: UnPassable
   m_TagString: Untagged
@@ -481,22 +480,6 @@ Transform:
   m_Father: {fileID: 177045153}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!19719996 &1260347161
-TilemapCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1260347159}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_MaximumTileChangeCount: 1000
-  m_ExtrusionFactor: 0.00001
 --- !u!483693784 &1260347162
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -1087,7 +1070,6 @@ GameObject:
   - component: {fileID: 1796707484}
   - component: {fileID: 1796707487}
   - component: {fileID: 1796707486}
-  - component: {fileID: 1796707485}
   m_Layer: 0
   m_Name: Passable
   m_TagString: Untagged
@@ -1110,22 +1092,6 @@ Transform:
   m_Father: {fileID: 177045153}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!19719996 &1796707485
-TilemapCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1796707483}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_MaximumTileChangeCount: 1000
-  m_ExtrusionFactor: 0.00001
 --- !u!483693784 &1796707486
 TilemapRenderer:
   m_ObjectHideFlags: 0
