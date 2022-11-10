@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                StartCoroutine("Watering");
+                Debug.Log("asdf");
                 canWater = false;
             }
         }
@@ -89,16 +89,5 @@ public class Player : MonoBehaviour
 
     }
 
-    IEnumerator Watering()
-    {
-        float timeLeft = 3f;
-
-        while(timeLeft >= 0)
-        {
-            timeLeft -= Time.deltaTime;
-            wateringLocation.SetActive(true);
-        }
-        wateringLocation.SetActive(false);
-        yield return null;
-    }
+   
 }
