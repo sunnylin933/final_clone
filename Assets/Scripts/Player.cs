@@ -18,7 +18,11 @@ public class Player : MonoBehaviour
     //Player Ability
     public bool canPush;
     public bool canAttack;
+    public bool canWater;
     public List<ItemInfo> inventory = new List<ItemInfo>();
+
+    //Transform or etc related to player
+    public GameObject wateringLocation;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +34,15 @@ public class Player : MonoBehaviour
     {
 
         
+
+        if(canWater == true)
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                StartCoroutine("Watering");
+                canWater = false;
+            }
+        }
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
@@ -68,7 +81,24 @@ public class Player : MonoBehaviour
             {
                 this.canPush = true;
             }
+            if(inventory[i].unlockAbility == "canWater")
+            {
+                this.canWater = true;
+            }
         }
 
+    }
+
+    IEnumerator Watering()
+    {
+        float timeLeft = 3f;
+
+        while(timeLeft >= 0)
+        {
+            timeLeft -= Time.deltaTime;
+            wateringLocation.SetActive(true);
+        }
+        wateringLocation.SetActive(false);
+        yield return null;
     }
 }
