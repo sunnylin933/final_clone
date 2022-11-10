@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     //Player Stats
     public int health = 2;
+    public int maxHealth=2;//I think we need max health
 
     //Player Animation
     public Animator animator;
