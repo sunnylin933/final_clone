@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     //Player Stats
     public int health = 2;
     public int maxHealth=2;//I think we need max health
+    public int dir=6;////2¡ý4¡û6¡ú8¡ü
 
     //Player Animation
     public Animator animator;
@@ -32,6 +33,12 @@ public class Player : MonoBehaviour
         
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
+        
+        //2¡ý4¡û6¡ú8¡ü
+        if (h < 0){dir = 4;}
+        if(h>0){dir = 6;}
+        if (v < 0) { dir = 2; }
+        if (v > 0) { dir = 8; }
 
         Vector3 moveDelta = new Vector3(h, v, 0);
         if(moveDelta != Vector3.zero)
