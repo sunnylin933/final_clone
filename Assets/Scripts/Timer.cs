@@ -14,9 +14,12 @@ public class Timer : MonoBehaviour
     public TMP_Text timerText;
     public GameObject player;
 
+    public int date;
+
     // Start is called before the first frame update
     void Start()
     {
+        date = 0;
         currentTime = startTime;
         timerText.text = currentTime.ToString();
     }
@@ -40,10 +43,12 @@ public class Timer : MonoBehaviour
             }
             else
             {
+                //Time end/day end event
                 Debug.Log("Times Up!");
                 timerStarted = false;
                 currentTime = 0;
                 player.transform.position = new Vector3(0, 0, 0);
+                date++;
             }
 
             timerText.text = time.ToString();
