@@ -273,7 +273,7 @@ MonoBehaviour:
   maxHealth: 2
   dir: 6
   animator: {fileID: 280549213}
-  moveSpeed: 2
+  moveSpeed: 3
   canPush: 0
   canAttack: 0
   canWater: 0
@@ -3483,7 +3483,7 @@ Canvas:
   m_GameObject: {fileID: 3452868446167022056}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -3551,7 +3551,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 5, y: -5}
+  m_AnchoredPosition: {x: 2.5, y: -2.5}
   m_SizeDelta: {x: 19.857086, y: 15.29361}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &3452868447043037576
@@ -3576,8 +3576,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 59
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 13caf5812545cc94c9f4ffa0fe570809, type: 2}
-  m_sharedMaterial: {fileID: -3364255197695142848, guid: 13caf5812545cc94c9f4ffa0fe570809, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3292e503b3714e84a907f5227b4fad27, type: 2}
+  m_sharedMaterial: {fileID: 5023837414161842384, guid: 3292e503b3714e84a907f5227b4fad27, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3601,8 +3601,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 38
-  m_fontSizeBase: 38
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3637,7 +3637,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -46.291, w: -30.588036}
+  m_margin: {x: 0, y: 0, z: 3.3129845, w: 3.8745193}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
