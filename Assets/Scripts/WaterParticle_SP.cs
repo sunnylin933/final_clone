@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterParticle : MonoBehaviour
+public class WaterParticle_SP : MonoBehaviour
 {
     GameObject player;
     float playerY;
@@ -28,7 +28,14 @@ public class WaterParticle : MonoBehaviour
     {
         if (collision && !collision.CompareTag("Holding") && !collision.CompareTag("WaterParticle"))
         {
+            Debug.Log("Sp Particle Hit!");
             Destroy(this.gameObject);
+            //Do something with watering
+            /*if (collision.GetComponent<>())
+            {
+                Waterable
+            }*/
         }
+        
     }
 }

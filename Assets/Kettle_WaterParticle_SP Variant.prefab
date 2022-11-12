@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1956532124260809993
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8067218652021030368, guid: 828921abc8a3203459b63494fd2627ab, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067218652021030368, guid: 828921abc8a3203459b63494fd2627ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.071
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067218652021030368, guid: 828921abc8a3203459b63494fd2627ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067218652021030368, guid: 828921abc8a3203459b63494fd2627ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067218652021030368, guid: 828921abc8a3203459b63494fd2627ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067218652021030368, guid: 828921abc8a3203459b63494fd2627ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067218652021030368, guid: 828921abc8a3203459b63494fd2627ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067218652021030368, guid: 828921abc8a3203459b63494fd2627ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067218652021030368, guid: 828921abc8a3203459b63494fd2627ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067218652021030368, guid: 828921abc8a3203459b63494fd2627ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067218652021030368, guid: 828921abc8a3203459b63494fd2627ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067218652021030369, guid: 828921abc8a3203459b63494fd2627ab, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067218652021030369, guid: 828921abc8a3203459b63494fd2627ab, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067218652021030369, guid: 828921abc8a3203459b63494fd2627ab, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067218652021030374, guid: 828921abc8a3203459b63494fd2627ab, type: 3}
+      propertyPath: m_Name
+      value: Kettle_WaterParticle_SP
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 521546447354334080, guid: 828921abc8a3203459b63494fd2627ab, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 828921abc8a3203459b63494fd2627ab, type: 3}
+--- !u!1 &8417925923187900655 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8067218652021030374, guid: 828921abc8a3203459b63494fd2627ab, type: 3}
+  m_PrefabInstance: {fileID: 1956532124260809993}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6493175039968178850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8417925923187900655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91aa3247130664342b09071b348ab3a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
