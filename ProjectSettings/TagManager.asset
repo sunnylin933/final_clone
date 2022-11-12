@@ -6,6 +6,7 @@ TagManager:
   tags:
   - WaterParticle
   - Holding
+  - Wall
   layers:
   - Default
   - TransparentFX
