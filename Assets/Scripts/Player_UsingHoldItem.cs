@@ -12,7 +12,7 @@ public class Player_UsingHoldItem : MonoBehaviour
     {
         None,
         Sword,
-        Kettle,
+        Kettle,//TO DO: Change into "Watering Can"
         Camera //Do we need camera?
     }
 
@@ -22,18 +22,22 @@ public class Player_UsingHoldItem : MonoBehaviour
     public GameObject sword;
     public GameObject holdSword;
     Animator sword_anim;
+    public float swordCDTime;
     float stab_range;
-    int sp_counter;
+    float sp_counter;
+    float swordCD;
 
-    //Kettle
-    public GameObject kettle;
+    //Watering Can
+    public GameObject kettle;//TO DO: Change into "Watering Can"
     public GameObject waterParticle;
     public GameObject specialParticle;
+    public float waterInterval = 1;
     Animator kettle_anim;
 
     void Start()
     {
-        sp_counter = 1;
+        swordCD = 0;
+        sp_counter = 0;
         stab_range = 1.2f;
         player = GameObject.Find("Player");
         sword_anim = sword.GetComponent<Animator>();
@@ -77,7 +81,7 @@ public class Player_UsingHoldItem : MonoBehaviour
                 kettle.transform.localScale = new Vector3(-1f,1f,1f);
                 break;
         }
-        if (Input.GetKey(KeyCode.X))
+        if (Input.GetKey(KeyCode.X) )
         {
             player.GetComponent<Player>().canMove = false;
             kettle_anim.SetBool("IsWatering",true);
@@ -86,10 +90,11 @@ public class Player_UsingHoldItem : MonoBehaviour
             float particleSpeedUp = 50f;
             float particleSpeed = 100f;
             GameObject particle;
-            if (sp_counter>0)
+            sp_counter+=Time.deltaTime*1;
+            if (sp_counter> waterInterval)
             {
+                sp_counter = 0;
                 //Modifu "WaterParticle_SP" to make watering effect
-                sp_counter--;
                 particle = Instantiate(specialParticle, new Vector3(kettle.transform.position.x, kettle.transform.position.y - 0.01f, transform.position.z), transform.rotation);
             }
             else
@@ -103,26 +108,26 @@ public class Player_UsingHoldItem : MonoBehaviour
 
             particle.GetComponent<Rigidbody2D>().AddForce(transform.right * particleSpeed*Random.Range(0.8f,1.2f));
             particle.GetComponent<Rigidbody2D>().AddForce(transform.up * particleSpeedUp * Random.Range(0.8f, 1.2f));
-            //GameObject tar = kettle.GetComponent<TriggerCheck>().tar_1; not use this, use special particle
-            /*if (tar != null)
-            {
-                Debug.Log(tar.name);
-                kettle.GetComponent<TriggerCheck>().tar_1 = null;
-            }*/
+
         }
         else
         {
             player.GetComponent<Player>().canMove = true;
             kettle.GetComponent<TriggerCheck>().tar_1 = kettle.GetComponent<TriggerCheck>().tar;
             kettle_anim.SetBool("IsWatering", false);
-            sp_counter = 1;
+            sp_counter = 0;
         }
     }
 
     void swordAttack()
     {
-        if (Input.GetKeyDown(KeyCode.X))
+        if (swordCD > 0)
         {
+            swordCD -= Time.deltaTime;
+        }
+        if (Input.GetKeyDown(KeyCode.X) && swordCD <= 0)
+        {
+            swordCD = swordCDTime;
             stab_range = 1.2f;
             sword_anim.SetTrigger("Stab");
             player.GetComponent<Player>().canMove = false;
@@ -134,15 +139,22 @@ public class Player_UsingHoldItem : MonoBehaviour
                 {
                     stab_range = 1.035f;
                 }
+                if (tar.GetComponent<Breakable>())
+                {
+                    tar.GetComponent<Breakable>().health--;
+
+                }
                 //Do something with tar
                 sword.GetComponent<TriggerCheck>().tar_1 = null;
             }
         }
         else
         {
+
             sword.GetComponent<TriggerCheck>().tar_1 = sword.GetComponent<TriggerCheck>().tar;
 
         }
+
         if (sword_anim.GetCurrentAnimatorStateInfo(0).IsName("Sword_Attack"))
         {
             holdSword.GetComponent<SpriteRenderer>().enabled = false;
@@ -153,6 +165,7 @@ public class Player_UsingHoldItem : MonoBehaviour
             holdSword.GetComponent<SpriteRenderer>().enabled = true;
             player.GetComponent<Player>().canMove = true;
         }
+
         switch (face)
         {
             case 1:

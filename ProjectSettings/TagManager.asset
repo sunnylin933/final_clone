@@ -5,8 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - WaterParticle
-  - Holding
   - Wall
+  - Sword
   layers:
   - Default
   - TransparentFX

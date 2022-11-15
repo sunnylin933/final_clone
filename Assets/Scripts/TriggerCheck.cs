@@ -20,7 +20,7 @@ public class TriggerCheck : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision && !collision.CompareTag("Holding")&&!collision.CompareTag("WaterParticle"))
+        if(collision &&!collision.CompareTag("WaterParticle"))
         {
             tar_1 = collision.gameObject;
         }
@@ -28,7 +28,7 @@ public class TriggerCheck : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision && !collision.CompareTag("Holding") && !collision.CompareTag("WaterParticle"))
+        if (collision && !collision.CompareTag("WaterParticle"))
         {
             tar = collision.gameObject;
         }

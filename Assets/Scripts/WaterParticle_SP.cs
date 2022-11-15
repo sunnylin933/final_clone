@@ -31,10 +31,10 @@ public class WaterParticle_SP : MonoBehaviour
             Debug.Log("Sp Particle Hit!");
             Destroy(this.gameObject);
             //Do something with watering
-            /*if (collision.GetComponent<>())
+            if (collision.GetComponent<Growable>())
             {
-                Waterable
-            }*/
+                collision.GetComponent<Growable>().counter++;
+            }
         }
         
     }
