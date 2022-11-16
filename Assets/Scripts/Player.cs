@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     //Player Stats
     public int health = 2;
     public int maxHealth=2;//I think we need max health
-    public int dir=6;////2¡ý4¡û6¡ú8¡ü
+    public int dir=6;
     public int face = 2;//1L 2R
     public bool canMove = true;
 
@@ -15,7 +15,10 @@ public class Player : MonoBehaviour
     public Animator animator;
 
     //Player movement
-
+    private RaycastHit2D hit;
+    private string[] raycastLayers;
+    private LayerMask raycastMask;
+    public bool canMove = true;
     public float moveSpeed;
 
     //Player Ability
@@ -29,16 +32,17 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        raycastLayers = new string[] { "Blocking", "Actor" };
+        raycastMask = LayerMask.GetMask(raycastLayers);
     }
 
     // Update is called once per frame
     void Update()
     {
+        RaycastHit2D hit_x;
+        RaycastHit2D hit_y;
 
-        
-
-        if(canWater == true)
+        if (canWater == true)
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
@@ -49,7 +53,6 @@ public class Player : MonoBehaviour
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
-        //2¡ý4¡û6¡ú8¡ü
         if (canMove)
         {
             if (h < 0) { dir = 4; face = 1; }
@@ -75,12 +78,24 @@ public class Player : MonoBehaviour
         {
             animator.SetBool("IsMoving", false);
         }
-        if (canMove)
+
+        if(canMove)
         {
-            transform.Translate(moveSpeed * moveDelta.x * Time.deltaTime, moveSpeed * moveDelta.y * Time.deltaTime, 0);
+            hit_x = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.25f), Vector2.right * h, 0.15f, raycastMask);
+            Debug.DrawRay(new Vector2(transform.position.x, transform.position.y - 0.25f), new Vector2(moveDelta.x, 0) * 2, Color.green);
+            if (hit_x.transform == null)
+            {
+                transform.Translate(moveSpeed * moveDelta.x * Time.deltaTime, 0, 0);
+            }
+
+            hit_y = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.25f), Vector2.up * v, 0.15f, raycastMask);
+            Debug.DrawRay(new Vector2(transform.position.x, transform.position.y - 0.25f), new Vector2(0, moveDelta.y) * 2, Color.green);
+            if (hit_y.transform == null)
+            {
+                transform.Translate(0, moveSpeed * moveDelta.y * Time.deltaTime, 0);
+            }
         }
     }
-
 
 
    public void UnlockAbility()
