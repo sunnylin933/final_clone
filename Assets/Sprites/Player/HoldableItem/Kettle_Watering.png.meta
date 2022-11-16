@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d118b138042747b43a055a5aee404e40
+guid: 4d9c803af092d974cb4756b21a17e430
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 133675_4
+      name: Kettle_Watering_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 110
+        x: 0
+        y: 0
         width: 16
-        height: 15
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 236327db6542c2544892fe85ff377c75
-      internalID: 1415385719
+      spriteID: e807acf76d6b96249a45745c2cafb357
+      internalID: -2124872073
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 133675_5
+      name: Kettle_Watering_1
       rect:
         serializedVersion: 2
-        x: 22
-        y: 110
+        x: 16
+        y: 0
         width: 16
-        height: 15
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,92 +152,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c39921e2ab19b54bb3a3fc77effccd1
-      internalID: -929332282
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 133675_10
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 75
-        width: 16
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6167a658712a1e746a8fef9f88ad6503
-      internalID: 1383074111
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 133675_15
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 41
-        width: 16
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4bfc40b1c40beec45b052f96f98a467b
-      internalID: 1070356422
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 133675_16
-      rect:
-        serializedVersion: 2
-        x: 22
-        y: 41
-        width: 16
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3dad987a550e4054499c350d8bf1599f
-      internalID: -1129036754
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 133675_17
-      rect:
-        serializedVersion: 2
-        x: 41
-        y: 41
-        width: 16
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 78f7bc3c4271273498d29e91483f4a00
-      internalID: 2065459382
+      spriteID: 9facfa4a32d255b448ea86b1ea78fc98
+      internalID: -1722421524
       vertices: []
       indices: 
       edges: []
@@ -253,35 +169,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      133675_6: 1603516358
-      133675_16: -1129036754
-      133675_7: -1000197484
-      133675_22: 910528506
-      133675_11: 1384912254
-      133675_21: -900310276
-      133675_25: -1106277358
-      133675_26: 1315579743
-      133675_9: -594890853
-      133675_23: 897007916
-      133675_18: -1939182967
-      133675_15: 1070356422
-      133675_0: 337990389
-      133675_17: 2065459382
-      133675_19: -149322848
-      133675_8: 1141093016
-      133675_24: -1602219953
-      133675_14: -96750497
-      133675_12: 113747168
-      133675_3: -553275864
-      133675_4: 1415385719
-      133675_13: -957155055
-      133675_1: -1501487759
-      133675_10: 1383074111
-      133675_5: -929332282
-      133675_27: 1877613622
-      133675_28: -1555967173
-      133675_20: -952450051
-      133675_2: 1353716346
+      Kettle_Watering_0: -2124872073
+      Kettle_Watering_1: -1722421524
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

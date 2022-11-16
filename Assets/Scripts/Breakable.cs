@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class Breakable : MonoBehaviour
 {
-
+    //I use Player_UsingHoldItem to detect this
     public int health;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void Update()
     {
-        if(collision.gameObject.tag == "Sword")
+        if (health <= 0)
         {
-            health--;
-            if(health <= 0)
-            {
-                Destroy(gameObject);
-            }
-           
+            Destroy(gameObject);
         }
+
     }
+
+
+
 }

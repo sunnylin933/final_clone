@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
         }
 
         Vector3 moveDelta = new Vector3(h, v, 0);
-        if(moveDelta != Vector3.zero)
+        if(canMove && moveDelta != Vector3.zero)
         {
             if(moveDelta.x < 0)
             {
@@ -87,7 +87,6 @@ public class Player : MonoBehaviour
             {
                 transform.Translate(moveSpeed * moveDelta.x * Time.deltaTime, 0, 0);
             }
-
 
             hit_y = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.25f), Vector2.up * v, 0.15f, raycastMask);
             Debug.DrawRay(new Vector2(transform.position.x, transform.position.y - 0.25f), new Vector2(0, moveDelta.y) * 2, Color.green);
