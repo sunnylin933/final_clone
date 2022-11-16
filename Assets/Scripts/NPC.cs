@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class NPC : MonoBehaviour
 {
     public string[] dialogue;
     public float detectRange;
-    public Text dialogueText;
+    public TextMeshProUGUI dialogueText;
     public GameObject dialoguePanel;
-    private int index;
+    public int index;
+    public GameObject player;
 
     public float wordSpeed;
     public bool playerIsClose;
@@ -23,7 +25,9 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerIsClose == true)
+        CheckDistance();
+
+        if(playerIsClose == true && Input.GetKeyDown(KeyCode.E))
         {
             if (dialoguePanel.activeInHierarchy)
             {
@@ -58,6 +62,19 @@ public class NPC : MonoBehaviour
         index = 0;
         dialoguePanel.SetActive(false);
     }
+    public void CheckDistance()
+    {
+        if(Mathf.Abs(Vector2.Distance(player.transform.position , this.transform.position)) < detectRange)
+        {
+            playerIsClose = true;
+        }
+        else
+        {
+            playerIsClose = false;
+            zeroText();
+        }
+    }
+    /*
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -73,10 +90,13 @@ public class NPC : MonoBehaviour
             zeroText();
         }
     }
-    IEnumerator Typing()
+    */
+    public IEnumerator Typing()
     {
         foreach(char letter in dialogue[index].ToCharArray())
         {
+           
+            dialogueText.text += letter;
             yield return new WaitForSeconds(wordSpeed);
             
         }
