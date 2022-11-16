@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     private RaycastHit2D hit;
     private string[] raycastLayers;
     private LayerMask raycastMask;
+    public bool canMove = true;
     public float moveSpeed;
 
     //Player Ability
@@ -78,7 +79,7 @@ public class Player : MonoBehaviour
             animator.SetBool("IsMoving", false);
         }
 
-        if (canMove)
+        if(canMove)
         {
             hit_x = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.25f), Vector2.right * h, 0.15f, raycastMask);
             Debug.DrawRay(new Vector2(transform.position.x, transform.position.y - 0.25f), new Vector2(moveDelta.x, 0) * 2, Color.green);
