@@ -103,7 +103,7 @@ public class Player_UsingHoldItem : MonoBehaviour
             }
             if (face==1)
             {
-                particleSpeed = -particleSpeed;
+                particleSpeed = -100f;
             }
 
             particle.GetComponent<Rigidbody2D>().AddForce(transform.right * particleSpeed*Random.Range(0.8f,1.2f));
