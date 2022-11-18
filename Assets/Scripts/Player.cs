@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
             Debug.DrawRay(new Vector2(transform.position.x, transform.position.y - 0.25f), new Vector2(0, moveDelta.y) * 2, Color.green);
             if (hit_y.transform == null)
             {
-                transform.Translate(0, moveSpeed * moveDelta.y * Time.deltaTime, 0);
+                transform.Translate(0, moveSpeed * moveDelta.y * Time.deltaTime, moveSpeed * moveDelta.y * Time.deltaTime);
             }
         }
     }
