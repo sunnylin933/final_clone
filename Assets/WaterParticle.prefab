@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 521546447354334080}
   - component: {fileID: 448583498206060943}
   m_Layer: 0
-  m_Name: Kettle_WaterParticle_0
+  m_Name: WaterParticle
   m_TagString: WaterParticle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

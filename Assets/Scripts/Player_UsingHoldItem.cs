@@ -12,7 +12,7 @@ public class Player_UsingHoldItem : MonoBehaviour
     {
         None,
         Sword,
-        Kettle,//TO DO: Change into "Watering Can"
+        WateringCan,//TO DO: Change into "Watering Can"
         Camera //Do we need camera?
     }
 
@@ -21,27 +21,27 @@ public class Player_UsingHoldItem : MonoBehaviour
     //Sword
     public GameObject sword;
     public GameObject holdSword;
-    Animator sword_anim;
+    Animator swordAnim;
     public float swordCDTime;
-    float stab_range;
-    float sp_counter;
+    float stabRange;
+    float spCounter;
     float swordCD;
 
     //Watering Can
-    public GameObject kettle;//TO DO: Change into "Watering Can"
+    public GameObject wateringCan;
     public GameObject waterParticle;
     public GameObject specialParticle;
     public float waterInterval = 1;
-    Animator kettle_anim;
+    Animator wateringCanAnim;
 
     void Start()
     {
         swordCD = 0;
-        sp_counter = 0;
-        stab_range = 1.2f;
+        spCounter = 0;
+        stabRange = 1.2f;
         player = GameObject.Find("Player");
-        sword_anim = sword.GetComponent<Animator>();
-        kettle_anim=kettle.GetComponent<Animator>();
+        swordAnim = sword.GetComponent<Animator>();
+        wateringCanAnim=wateringCan.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -51,18 +51,18 @@ public class Player_UsingHoldItem : MonoBehaviour
         face = player.GetComponent<Player>().face;
         switch (hold){
             case Holdable.Sword:
-                kettle.GetComponent<SpriteRenderer>().enabled = false;
+                wateringCan.GetComponent<SpriteRenderer>().enabled = false;
                 holdSword.GetComponent<SpriteRenderer>().enabled = true;
                 swordAttack();
                 break;
 
-            case Holdable.Kettle:
-                kettle.GetComponent<SpriteRenderer>().enabled = true;
+            case Holdable.WateringCan:
+                wateringCan.GetComponent<SpriteRenderer>().enabled = true;
                 holdSword.GetComponent<SpriteRenderer>().enabled = false;
                 watering();
                 break;
             default:
-                kettle.GetComponent<SpriteRenderer>().enabled = false;
+                wateringCan.GetComponent<SpriteRenderer>().enabled = false;
                 holdSword.GetComponent<SpriteRenderer>().enabled = false;
                 break;
         }
@@ -72,34 +72,34 @@ public class Player_UsingHoldItem : MonoBehaviour
         switch (face)
         {
             case 1:
-                kettle.transform.position = new Vector3(player.transform.position.x - 0.38f, player.transform.position.y + 0.007f, 0);
-                kettle.transform.localScale = new Vector3(1f, 1f, 1f);
+                wateringCan.transform.position = new Vector3(player.transform.position.x - 0.38f, player.transform.position.y + 0.007f, 0);
+                wateringCan.transform.localScale = new Vector3(1f, 1f, 1f);
                 break;
 
             case 2:
-                kettle.transform.position = new Vector3(player.transform.position.x+0.38f, player.transform.position.y +0.007f, 0);
-                kettle.transform.localScale = new Vector3(-1f,1f,1f);
+                wateringCan.transform.position = new Vector3(player.transform.position.x+0.38f, player.transform.position.y +0.007f, 0);
+                wateringCan.transform.localScale = new Vector3(-1f,1f,1f);
                 break;
         }
         if (Input.GetKey(KeyCode.X) )
         {
             player.GetComponent<Player>().canMove = false;
-            kettle_anim.SetBool("IsWatering",true);
+            wateringCanAnim.SetBool("IsWatering",true);
 
             //Generate Water Particle
             float particleSpeedUp = 50f;
             float particleSpeed = 100f;
             GameObject particle;
-            sp_counter+=Time.deltaTime*1;
-            if (sp_counter> waterInterval)
+            spCounter+=Time.deltaTime*1;
+            if (spCounter> waterInterval)
             {
-                sp_counter = 0;
+                spCounter = 0;
                 //Modifu "WaterParticle_SP" to make watering effect
-                particle = Instantiate(specialParticle, new Vector3(kettle.transform.position.x, kettle.transform.position.y - 0.01f, transform.position.z), transform.rotation);
+                particle = Instantiate(specialParticle, new Vector3(wateringCan.transform.position.x, wateringCan.transform.position.y - 0.01f, transform.position.z), transform.rotation);
             }
             else
             {
-                particle = Instantiate(waterParticle, new Vector3(kettle.transform.position.x, kettle.transform.position.y - 0.01f, transform.position.z), transform.rotation);
+                particle = Instantiate(waterParticle, new Vector3(wateringCan.transform.position.x, wateringCan.transform.position.y - 0.01f, transform.position.z), transform.rotation);
             }
             if (face==1)
             {
@@ -113,9 +113,9 @@ public class Player_UsingHoldItem : MonoBehaviour
         else
         {
             player.GetComponent<Player>().canMove = true;
-            kettle.GetComponent<TriggerCheck>().tar_1 = kettle.GetComponent<TriggerCheck>().tar;
-            kettle_anim.SetBool("IsWatering", false);
-            sp_counter = 0;
+            wateringCan.GetComponent<TriggerCheck>().tar_1 = wateringCan.GetComponent<TriggerCheck>().tar;
+            wateringCanAnim.SetBool("IsWatering", false);
+            spCounter = 0;
         }
     }
 
@@ -128,8 +128,8 @@ public class Player_UsingHoldItem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X) && swordCD <= 0)
         {
             swordCD = swordCDTime;
-            stab_range = 1.2f;
-            sword_anim.SetTrigger("Stab");
+            stabRange = 1.2f;
+            swordAnim.SetTrigger("Stab");
             player.GetComponent<Player>().canMove = false;
             GameObject tar = sword.GetComponent<TriggerCheck>().tar_1;
             if (tar != null)
@@ -137,7 +137,7 @@ public class Player_UsingHoldItem : MonoBehaviour
                 Debug.Log(tar.name);
                 if (tar.CompareTag("Wall"))
                 {
-                    stab_range = 1.035f;
+                    stabRange = 1.035f;
                 }
                 if (tar.GetComponent<Breakable>())
                 {
@@ -155,7 +155,7 @@ public class Player_UsingHoldItem : MonoBehaviour
 
         }
 
-        if (sword_anim.GetCurrentAnimatorStateInfo(0).IsName("Sword_Attack"))
+        if (swordAnim.GetCurrentAnimatorStateInfo(0).IsName("Sword_Attack"))
         {
             holdSword.GetComponent<SpriteRenderer>().enabled = false;
             player.GetComponent<Player>().canMove = false;
@@ -181,22 +181,22 @@ public class Player_UsingHoldItem : MonoBehaviour
         switch (dir)
         {
             case 2:
-                sword.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - stab_range, 0);
+                sword.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - stabRange, 0);
                 sword.transform.eulerAngles = new Vector3(0, 0, 180f);
                 //castDir = Vector2.down;
                 break;
             case 4:
-                sword.transform.position = new Vector3(player.transform.position.x - stab_range, player.transform.position.y, 0);
+                sword.transform.position = new Vector3(player.transform.position.x - stabRange, player.transform.position.y, 0);
                 sword.transform.eulerAngles = new Vector3(0, 0, 90f);
                 //castDir = Vector2.left;
                 break;
             case 6:
-                sword.transform.position = new Vector3(player.transform.position.x + stab_range, player.transform.position.y, 0);
+                sword.transform.position = new Vector3(player.transform.position.x + stabRange, player.transform.position.y, 0);
                 sword.transform.eulerAngles = new Vector3(0, 0, -90f);
                 //castDir = Vector2.right;
                 break;
             case 8:
-                sword.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + stab_range, 0);
+                sword.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + stabRange, 0);
                 sword.transform.eulerAngles = new Vector3(0, 0, 0f);
                 //castDir = Vector2.up;
                 break;
