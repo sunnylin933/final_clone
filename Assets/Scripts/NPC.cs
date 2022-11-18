@@ -12,6 +12,7 @@ public class NPC : MonoBehaviour
     public GameObject dialoguePanel;
     public int index;
     public GameObject player;
+    public bool typing;
 
     public float wordSpeed;
     public bool playerIsClose;
@@ -27,7 +28,7 @@ public class NPC : MonoBehaviour
     {
         CheckDistance();
 
-        if(playerIsClose == true && Input.GetKeyDown(KeyCode.E))
+        if(playerIsClose == true && typing == false)
         {
             if (dialoguePanel.activeInHierarchy)
             {
@@ -35,6 +36,7 @@ public class NPC : MonoBehaviour
             }
             else
             {
+                typing = true;
                 dialoguePanel.SetActive(true);
                 StartCoroutine(Typing());
             }
@@ -93,6 +95,7 @@ public class NPC : MonoBehaviour
     */
     public IEnumerator Typing()
     {
+
         foreach(char letter in dialogue[index].ToCharArray())
         {
            
@@ -100,5 +103,6 @@ public class NPC : MonoBehaviour
             yield return new WaitForSeconds(wordSpeed);
             
         }
+        typing = false;
     }
 }
