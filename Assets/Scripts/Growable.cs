@@ -6,13 +6,21 @@ public class Growable : MonoBehaviour
 {
     public int toGrow;
     public int counter = 0;
+    public GameObject reward;
 
 
     private void Update()
     {
         if(counter == toGrow)
         {
-            Debug.Log("success");
+            var tagName = this.gameObject.tag;
+            switch (tagName)
+            {
+                case "Sprout":
+                    Instantiate(reward, this.transform.position, reward.transform.rotation);
+                    Destroy(this.gameObject);
+                    break;
+            }
         }
     }
 
