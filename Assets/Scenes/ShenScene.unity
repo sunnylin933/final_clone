@@ -1029,7 +1029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 2
-  maxHealth: 2
+  maxHealth: 10
   dir: 6
   face: 2
   canMove: 1

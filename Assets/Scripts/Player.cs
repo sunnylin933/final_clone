@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     //Player Stats
     public int health = 2;
     public int maxHealth=2;//I think we need max health
-    public int dir=6;////2¡ý4¡û6¡ú8¡ü
+    public int dir=6;////2ï¿½ï¿½4ï¿½ï¿½6ï¿½ï¿½8ï¿½ï¿½
     public int face = 2;//1L 2R
     public bool canMove = true;
 
@@ -15,7 +15,10 @@ public class Player : MonoBehaviour
     public Animator animator;
 
     //Player movement
-
+    private RaycastHit2D hit;
+    private string[] raycastLayers;
+    private LayerMask raycastMask;
+    
     public float moveSpeed;
 
     //Player Ability
@@ -49,7 +52,7 @@ public class Player : MonoBehaviour
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
-        //2¡ý4¡û6¡ú8¡ü
+        //2ï¿½ï¿½4ï¿½ï¿½6ï¿½ï¿½8ï¿½ï¿½
         if (canMove)
         {
             if (h < 0) { dir = 4; face = 1; }
@@ -77,7 +80,8 @@ public class Player : MonoBehaviour
         }
         if (canMove)
         {
-            transform.Translate(moveSpeed * moveDelta.x * Time.deltaTime, moveSpeed * moveDelta.y * Time.deltaTime, 0);
+            transform.Translate(moveSpeed * moveDelta.x * Time.deltaTime, moveSpeed * moveDelta.y * Time.deltaTime, moveSpeed * moveDelta.y * Time.deltaTime);
+            
         }
     }
 
