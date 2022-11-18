@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     public int maxHealth=2;//I think we need max health
     public int dir=6;
     public int face = 2;//1L 2R
-    public bool canMove = true;
 
     //Player Animation
     public Animator animator;
