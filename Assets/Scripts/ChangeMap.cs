@@ -22,10 +22,13 @@ public class ChangeMap : MonoBehaviour
         {
             targetMap.SetActive(true);
             currentMap.SetActive(false);
-            targetCamera.gameObject.SetActive(true);
-            targetCamera.gameObject.SetActive(false);
+            if(targetCamera != null)
+            {
+                targetCamera.gameObject.SetActive(true);
+                targetCamera.gameObject.SetActive(false);
+            }
 
-            if(goingDown == true)
+            if (goingDown == true)
             {
                 collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, collision.transform.position.y, 7.6f);
             }

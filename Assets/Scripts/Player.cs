@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        raycastLayers = new string[] { "Blocking", "Actor" };
+        raycastLayers = new string[] { "Blocking", "Actor", "Water" };
         raycastMask = LayerMask.GetMask(raycastLayers);
     }
 
