@@ -6,6 +6,7 @@ public class MapChange : MonoBehaviour
 {
     public Camera main;
     public Vector3 offset;
+    public Vector3 rightOffset;
 
 
 
@@ -22,13 +23,13 @@ public class MapChange : MonoBehaviour
 
             if (Input.GetKey(KeyCode.S))
             {
-                main.transform.position += new Vector3(0, -15f, 0);
+                main.transform.position += rightOffset;
                 collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x , collision.gameObject.transform.position.y, 7f);
             }
 
             if (Input.GetKey(KeyCode.W))
             {
-                main.transform.position += new Vector3(0, 15f, 0);
+                main.transform.position += offset;
                 collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y, -7f);
             }
             if (Input.GetKey(KeyCode.A))
@@ -38,7 +39,7 @@ public class MapChange : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.D))
             {
-                main.transform.position += offset;
+                main.transform.position += rightOffset;
                 //collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y, -7f);
             }
 
