@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class ChangeMap : MonoBehaviour
 {
-    public Camera targetCamera;
-    public Camera currentCamera;
-    public GameObject targetMap;
-    public GameObject currentMap;
-    public bool goingDown;
-    public bool goingUp;
-    public bool goingLeft;
-    public bool goingRight;
+    public Camera main;
+    
 
 
 
@@ -20,19 +14,38 @@ public class ChangeMap : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
+<<<<<<< Updated upstream:Assets/ChangeMap.cs
             targetMap.SetActive(true);
             currentMap.SetActive(false);
             targetCamera.gameObject.SetActive(true);
             targetCamera.gameObject.SetActive(false);
 
             if(goingDown == true)
+=======
+            
+         
+
+            if (Input.GetKey(KeyCode.S))
             {
-                collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, collision.transform.position.y, 7.6f);
+                main.transform.position += new Vector3(0, -15f, 0);
+                collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x , collision.gameObject.transform.position.y, 7f);
             }
 
-            if (goingUp == true)
+            if (Input.GetKey(KeyCode.W))
+>>>>>>> Stashed changes:Assets/Scripts/ChangeMap.cs
             {
-                collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, collision.transform.position.y, -6f);
+                main.transform.position += new Vector3(0, 15f, 0);
+                collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y, -7f);
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                main.transform.position += new Vector3(-20f, 0, 0);
+                //collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y, -7f);
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                main.transform.position += new Vector3(20f, 0, 0);
+                //collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y, -7f);
             }
 
 
