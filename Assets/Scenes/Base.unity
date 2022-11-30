@@ -31207,12 +31207,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b1bb7e41d49514683ecbf1587df46f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1582654058}
   hold: 1
   sword: {fileID: 2036947419}
   holdSword: {fileID: 691203601}
   swordCDTime: 1
-  wateringCan: {fileID: 0}
+  wateringCan: {fileID: 113820944}
   waterParticle: {fileID: 8067218652021030374, guid: 828921abc8a3203459b63494fd2627ab, type: 3}
   specialParticle: {fileID: 8417925923187900655, guid: be0fd6ba96a77f948a1b0d9544846c32, type: 3}
   waterInterval: 1
