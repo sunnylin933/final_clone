@@ -17,12 +17,15 @@ public class Timer : MonoBehaviour
 
     public int date;
 
+    public GameObject[] everydayGrowable;
+
     // Start is called before the first frame update
     void Start()
     {
         date = 0;
         currentTime = startTime;
         timerText.text = currentTime.ToString();
+        makeGrowableAgain();
     }
 
     // Update is called once per frame
@@ -51,6 +54,7 @@ public class Timer : MonoBehaviour
                     currentTime = 0;
                     player.transform.position = new Vector3(0, 0, 0);
                     date++;
+                    makeGrowableAgain();
                 }
 
                 timerText.text = time.ToString();
@@ -59,6 +63,17 @@ public class Timer : MonoBehaviour
        else
         {
             timer.SetActive(false);
+        }
+    }
+
+    void makeGrowableAgain()
+    {
+        foreach (GameObject obj in everydayGrowable)
+        {
+            if (obj.GetComponent<Growable>())
+            {
+                obj.GetComponent<Growable>().waterable = true;
+            }
         }
     }
 }

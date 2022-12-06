@@ -7,12 +7,20 @@ public class Growable : MonoBehaviour
     public int toGrow;
     public int counter = 0;
     public GameObject reward;
+    public bool waterable;
+    public Sprite[] growStateSprite;
 
+    private void Start()
+    {
+        
+    }
 
     private void Update()
     {
-        if(counter == toGrow)
+
+        if (counter == toGrow)
         {
+            this.GetComponent<SpriteRenderer>().sprite = growStateSprite[toGrow];
             var tagName = this.gameObject.tag;
             switch (tagName)
             {
@@ -21,6 +29,10 @@ public class Growable : MonoBehaviour
                     Destroy(this.gameObject);
                     break;
             }
+        }
+        else
+        {
+            this.GetComponent<SpriteRenderer>().sprite = growStateSprite[counter];
         }
     }
 

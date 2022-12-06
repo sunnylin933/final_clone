@@ -33,7 +33,11 @@ public class WaterParticle_SP : MonoBehaviour
             //Do something with watering
             if (collision.GetComponent<Growable>())
             {
-                collision.GetComponent<Growable>().counter++;
+                if (collision.GetComponent<Growable>().waterable)
+                {
+                    collision.GetComponent<Growable>().counter++;
+                    collision.GetComponent<Growable>().waterable = false;
+                }
             }
         }
         
