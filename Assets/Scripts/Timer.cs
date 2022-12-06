@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    public static bool isViewable = false;
+    public static bool isViewable = true;
     public float currentTime;
     public float startTime;
     public bool timerStarted;
@@ -28,11 +28,12 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isViewable)
-        {
-            if(!timer.activeSelf) timer.SetActive(true);
 
-            if (Input.GetKeyDown(KeyCode.Slash)) timerStarted = true;
+        if (Input.GetKeyDown(KeyCode.Slash)) timerStarted = true;
+
+        if (isViewable)
+        {
+           
 
             if (timerStarted)
             {

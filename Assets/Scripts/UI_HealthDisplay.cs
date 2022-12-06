@@ -44,7 +44,7 @@ public class UI_HealthDisplay : MonoBehaviour
         for(int i=max_health;i< Hearts.Length; i++)
         {
             Hearts[i].GetComponent<Image>().sprite = empty;
-           Window[i].GetComponent<Image>().sprite = empty;
+            Window[i].GetComponent<Image>().sprite = empty;
         }
         for(int i = 1; i < max_health - 1; i++)
         {
