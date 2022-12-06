@@ -131,9 +131,22 @@ public class Player_UsingHoldItem : MonoBehaviour
             stabRange = 1.2f;
             swordAnim.SetTrigger("Stab");
             player.GetComponent<Player>().canMove = false;
-            GameObject tar = sword.GetComponent<TriggerCheck>().tar_1;
+            List<GameObject> tar = sword.GetComponent<TriggerCheck>().targets;
             if (tar != null)
             {
+                for(int i = 0; i < tar.Count; i++)
+                {
+                    if (tar[i].CompareTag("Wall"))
+                    {
+                        stabRange = 1.035f;
+                    }
+                    if (tar[i].GetComponent<Breakable>())
+                    {
+                        tar[i].GetComponent<Breakable>().health--;
+
+                    }
+                }
+                /*
                 Debug.Log(tar.name);
                 if (tar.CompareTag("Wall"))
                 {
@@ -144,8 +157,9 @@ public class Player_UsingHoldItem : MonoBehaviour
                     tar.GetComponent<Breakable>().health--;
 
                 }
+                */
                 //Do something with tar
-                sword.GetComponent<TriggerCheck>().tar_1 = null;
+                sword.GetComponent<TriggerCheck>().targets.Clear();
             }
         }
         else
