@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
-  m_Name: WaveRightTop_Inverted
+  m_Name: WaveLeft
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: -1458306212, guid: 2fafb436126f06c4abe64dbf93439754, type: 3}
-  - {fileID: 1534473410, guid: 2fafb436126f06c4abe64dbf93439754, type: 3}
-  - {fileID: -702182685, guid: 2fafb436126f06c4abe64dbf93439754, type: 3}
-  - {fileID: 1534473410, guid: 2fafb436126f06c4abe64dbf93439754, type: 3}
-  - {fileID: -1458306212, guid: 2fafb436126f06c4abe64dbf93439754, type: 3}
+  - {fileID: -523905311, guid: d1c64611d89620f41b16df0f7dc59f48, type: 3}
+  - {fileID: 1571976929, guid: 7caac51ea12c940418c8c420d9fac433, type: 3}
+  - {fileID: 1711915086, guid: db96fd7ed141dda48ba1900337dd9ff9, type: 3}
+  - {fileID: 1571976929, guid: 7caac51ea12c940418c8c420d9fac433, type: 3}
+  - {fileID: -523905311, guid: d1c64611d89620f41b16df0f7dc59f48, type: 3}
   m_MinSpeed: 2
   m_MaxSpeed: 2
   m_AnimationStartTime: 0
