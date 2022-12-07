@@ -5,12 +5,13 @@ using UnityEngine;
 public class ToolManager : MonoBehaviour
 {
     public List<ToolManagerObject> Tools;
-    public Player player;
+    public GameObject p;
+    Player player;
     public Player_UsingHoldItem holdItem;
     public int savePointID = 0;
     void Start()
     {
-        
+        player = p.GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -44,14 +45,14 @@ public class ToolManager : MonoBehaviour
                     case ToolManagerObject.tags.Sword:
                         if (player.canAttack)
                         {
-                            Instantiate(obj.pickableObject, obj.savePosition[savePointID], Quaternion.identity);
+                            Instantiate(obj.pickableObject, p.transform.position+new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
                         }
                         break;
 
                     case ToolManagerObject.tags.WateringCan:
                         if (player.canWater)
                         {
-                            Instantiate(obj.pickableObject, obj.savePosition[savePointID], Quaternion.identity);
+                            Instantiate(obj.pickableObject, p.transform.position+ new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
                         }
                         break;
                 }
