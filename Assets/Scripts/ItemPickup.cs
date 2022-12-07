@@ -22,7 +22,7 @@ public class ItemPickup : MonoBehaviour
             //unlock abilities on player by adding them to Player Inventory
             player.inventory.Add(itemInfo);
             player.UnlockAbility();
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }
