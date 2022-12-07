@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public int dir=6;
     public int face = 2;//1L 2R
 
+
     //Player Animation
     public Animator animator;
 
@@ -28,6 +29,10 @@ public class Player : MonoBehaviour
 
     //Transform or etc related to player
     public GameObject wateringLocation;
+
+    //Raycast 
+    public RaycastHit2D hit_x;
+    public RaycastHit2D hit_y;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,8 +43,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D hit_x;
-        RaycastHit2D hit_y;
 
         if (canWater == true)
         {
@@ -93,6 +96,7 @@ public class Player : MonoBehaviour
             {
                 transform.Translate(0, moveSpeed * moveDelta.y * Time.deltaTime, 0);
             }
+
         }
     }
 
@@ -117,5 +121,4 @@ public class Player : MonoBehaviour
 
     }
 
-   
 }
