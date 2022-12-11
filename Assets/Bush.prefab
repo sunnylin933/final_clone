@@ -125,3 +125,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
+  next_sprite: {fileID: 220154918, guid: 8d8215f3bf2a29840b8149780ca12765, type: 3}

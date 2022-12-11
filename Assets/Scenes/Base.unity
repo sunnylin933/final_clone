@@ -2334,6 +2334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tar: {fileID: 0}
   tar_1: {fileID: 0}
+  targets: []
 --- !u!1 &144883234
 GameObject:
   m_ObjectHideFlags: 0
@@ -36860,7 +36861,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1844837693
 Transform:
   m_ObjectHideFlags: 0
@@ -42256,6 +42257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tar: {fileID: 0}
   tar_1: {fileID: 0}
+  targets: []
 --- !u!212 &2036947423
 SpriteRenderer:
   m_ObjectHideFlags: 0

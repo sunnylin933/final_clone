@@ -180,9 +180,9 @@ MonoBehaviour:
   maxHealth: 2
   dir: 6
   face: 2
-  canMove: 1
   animator: {fileID: 11463200}
-  moveSpeed: 0.75
+  canMove: 1
+  moveSpeed: 3
   canPush: 0
   canAttack: 0
   canWater: 0
@@ -629,6 +629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toGrow: 2
   counter: 0
+  reward: {fileID: 0}
 --- !u!212 &414962015
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1039,7 +1040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AssetsPPU: 80
+  m_AssetsPPU: 16
   m_RefResolutionX: 320
   m_RefResolutionY: 240
   m_UpscaleRT: 1
@@ -1082,7 +1083,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.07
+  orthographic size: 5.2772155
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1881,6 +1882,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 133607_4
       objectReference: {fileID: 0}
+    - target: {fileID: 3261713859139292785, guid: 01324a2a08d5eef40aa3dffeb6880a86, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3261713859139292786, guid: 01324a2a08d5eef40aa3dffeb6880a86, type: 3}
       propertyPath: player
       value: 
@@ -1899,11 +1904,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3261713859139292788, guid: 01324a2a08d5eef40aa3dffeb6880a86, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.79
+      value: -3.54
       objectReference: {fileID: 0}
     - target: {fileID: 3261713859139292788, guid: 01324a2a08d5eef40aa3dffeb6880a86, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.83
+      value: 2.85
       objectReference: {fileID: 0}
     - target: {fileID: 3261713859139292788, guid: 01324a2a08d5eef40aa3dffeb6880a86, type: 3}
       propertyPath: m_LocalPosition.z
