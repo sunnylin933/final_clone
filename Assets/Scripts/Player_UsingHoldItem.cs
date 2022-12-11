@@ -12,8 +12,7 @@ public class Player_UsingHoldItem : MonoBehaviour
     {
         None,
         Sword,
-        WateringCan,//TO DO: Change into "Watering Can"
-        Camera //Do we need camera?
+        WateringCan
     }
 
     public Holdable hold;
@@ -23,9 +22,9 @@ public class Player_UsingHoldItem : MonoBehaviour
     public GameObject holdSword;
     Animator swordAnim;
     public float swordCDTime;
-    float stabRange;
+    float stabRange = 1.2f;
     float spCounter;
-    float swordCD;
+    float swordCD = 0;
 
     //Watering Can
     public GameObject wateringCan;
@@ -36,9 +35,7 @@ public class Player_UsingHoldItem : MonoBehaviour
 
     void Start()
     {
-        swordCD = 0;
         spCounter = 0;
-        stabRange = 1.2f;
         player = GameObject.Find("Player");
         swordAnim = sword.GetComponent<Animator>();
         wateringCanAnim=wateringCan.GetComponent<Animator>();
@@ -51,15 +48,21 @@ public class Player_UsingHoldItem : MonoBehaviour
         face = player.GetComponent<Player>().face;
         switch (hold){
             case Holdable.Sword:
-                wateringCan.GetComponent<SpriteRenderer>().enabled = false;
-                holdSword.GetComponent<SpriteRenderer>().enabled = true;
-                swordAttack();
+                EnableSword();
+                CheckSwordDirection();
+                CheckSwordInput();
+                CheckCanMove();
+
+                if (swordCD > 0)
+                {
+                    swordCD -= Time.deltaTime;
+                }
                 break;
 
             case Holdable.WateringCan:
                 wateringCan.GetComponent<SpriteRenderer>().enabled = true;
                 holdSword.GetComponent<SpriteRenderer>().enabled = false;
-                watering();
+                Watering();
                 break;
             default:
                 wateringCan.GetComponent<SpriteRenderer>().enabled = false;
@@ -67,20 +70,10 @@ public class Player_UsingHoldItem : MonoBehaviour
                 break;
         }
     }
-    void watering()
+    void Watering()
     {
-        switch (face)
-        {
-            case 1:
-                wateringCan.transform.position = new Vector3(player.transform.position.x - 0.38f, player.transform.position.y + 0.007f, 0);
-                wateringCan.transform.localScale = new Vector3(1f, 1f, 1f);
-                break;
+        CheckFacingDirection();
 
-            case 2:
-                wateringCan.transform.position = new Vector3(player.transform.position.x+0.38f, player.transform.position.y +0.007f, 0);
-                wateringCan.transform.localScale = new Vector3(-1f,1f,1f);
-                break;
-        }
         if (Input.GetKey(KeyCode.X) )
         {
             player.GetComponent<Player>().canMove = false;
@@ -119,56 +112,34 @@ public class Player_UsingHoldItem : MonoBehaviour
         }
     }
 
-    void swordAttack()
+
+    //Sword Methods
+    public void EnableSword()
     {
-        if (swordCD > 0)
+        wateringCan.GetComponent<SpriteRenderer>().enabled = false;
+        holdSword.GetComponent<SpriteRenderer>().enabled = true;
+    }
+    public void CheckSwordInput()
+    {
+        if (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
-            swordCD -= Time.deltaTime;
-        }
-        if (Input.GetKeyDown(KeyCode.X) && swordCD <= 0)
-        {
-            swordCD = swordCDTime;
-            stabRange = 1.2f;
-            swordAnim.SetTrigger("Stab");
-            player.GetComponent<Player>().canMove = false;
-            List<GameObject> tar = sword.GetComponent<TriggerCheck>().targets;
-            if (tar != null)
+            if (swordCD <= 0)
             {
-                for(int i = 0; i < tar.Count; i++)
-                {
-                    if (tar[i].CompareTag("Wall"))
-                    {
-                        stabRange = 1.035f;
-                    }
-                    if (tar[i].GetComponent<Breakable>())
-                    {
-                        tar[i].GetComponent<Breakable>().health--;
-
-                    }
-                }
-                /*
-                Debug.Log(tar.name);
-                if (tar.CompareTag("Wall"))
-                {
-                    stabRange = 1.035f;
-                }
-                if (tar.GetComponent<Breakable>())
-                {
-                    tar.GetComponent<Breakable>().health--;
-
-                }
-                */
-                //Do something with tar
-                sword.GetComponent<TriggerCheck>().targets.Clear();
+                SwordAttack();
             }
         }
-        else
-        {
+    }
 
-            sword.GetComponent<TriggerCheck>().tar_1 = sword.GetComponent<TriggerCheck>().tar;
+    void SwordAttack()
+    {
+        player.GetComponent<Player>().canMove = false;
+        swordAnim.SetTrigger("Stab");
+        CheckTargets();
+        swordCD = swordCDTime;
+    }
 
-        }
-
+    public void CheckCanMove()
+    {
         if (swordAnim.GetCurrentAnimatorStateInfo(0).IsName("Sword_Attack"))
         {
             holdSword.GetComponent<SpriteRenderer>().enabled = false;
@@ -179,7 +150,10 @@ public class Player_UsingHoldItem : MonoBehaviour
             holdSword.GetComponent<SpriteRenderer>().enabled = true;
             player.GetComponent<Player>().canMove = true;
         }
+    }
 
+    public void CheckSwordDirection()
+    {
         switch (face)
         {
             case 1:
@@ -188,7 +162,7 @@ public class Player_UsingHoldItem : MonoBehaviour
                 break;
 
             case 2:
-                holdSword.transform.position = new Vector3(player.transform.position.x -0.312f, player.transform.position.y + 0.263f, 0);
+                holdSword.transform.position = new Vector3(player.transform.position.x - 0.312f, player.transform.position.y + 0.263f, 0);
                 holdSword.transform.localScale = new Vector3(1f, 1f, 1f);
                 break;
         }
@@ -215,7 +189,43 @@ public class Player_UsingHoldItem : MonoBehaviour
                 //castDir = Vector2.up;
                 break;
         }
-       
+    }
+    public void CheckTargets()
+    {
+        List<GameObject> tar = sword.GetComponent<TriggerCheck>().targets;
+        if (tar != null)
+        {
+            for (int i = 0; i < tar.Count; i++)
+            {
+                if (tar[i].CompareTag("Wall"))
+                {
+                    stabRange = 1.035f;
+                }
+                if (tar[i].GetComponent<Breakable>())
+                {
+                    tar[i].GetComponent<Breakable>().health--;
+
+                }
+            }
+            sword.GetComponent<TriggerCheck>().targets.Clear();
+        }
+    }
+
+    //Watering Can Methods
+    public void CheckFacingDirection()
+    {
+        switch (face)
+        {
+            case 1:
+                wateringCan.transform.position = new Vector3(player.transform.position.x - 0.38f, player.transform.position.y + 0.007f, 0);
+                wateringCan.transform.localScale = new Vector3(1f, 1f, 1f);
+                break;
+
+            case 2:
+                wateringCan.transform.position = new Vector3(player.transform.position.x + 0.38f, player.transform.position.y + 0.007f, 0);
+                wateringCan.transform.localScale = new Vector3(-1f, 1f, 1f);
+                break;
+        }
     }
 }
 
