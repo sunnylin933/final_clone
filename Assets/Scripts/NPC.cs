@@ -26,7 +26,7 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckDistance();
+        
 
         if(playerIsClose == true && typing == false)
         {
@@ -60,23 +60,25 @@ public class NPC : MonoBehaviour
 
     public void zeroText()
     {
+        typing = false;
+        StopAllCoroutines();
         dialogueText.text = "";
         index = 0;
         dialoguePanel.SetActive(false);
     }
+    
     public void CheckDistance()
     {
-        if(Mathf.Abs(Vector2.Distance(player.transform.position , this.transform.position)) < detectRange)
-        {
-            playerIsClose = true;
-        }
-        else
+        if(Mathf.Abs(Vector2.Distance(player.transform.position , this.transform.position)) > detectRange)
         {
             playerIsClose = false;
+            typing = false;
             zeroText();
         }
+     
     }
-    /*
+    
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -92,17 +94,17 @@ public class NPC : MonoBehaviour
             zeroText();
         }
     }
-    */
+    
     public IEnumerator Typing()
     {
 
         foreach(char letter in dialogue[index].ToCharArray())
         {
-           
+            Debug.Log("ff");
             dialogueText.text += letter;
             yield return new WaitForSeconds(wordSpeed);
             
         }
-        typing = false;
+        
     }
 }
