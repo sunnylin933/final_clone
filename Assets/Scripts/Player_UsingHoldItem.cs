@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player_UsingHoldItem : MonoBehaviour
 {
     public GameObject player;
+    public GameObject swordObj;
     int dir;
     int face;
 
@@ -125,6 +126,7 @@ public class Player_UsingHoldItem : MonoBehaviour
         {
             if (swordCD <= 0)
             {
+                
                 SwordAttack();
             }
         }
@@ -132,6 +134,7 @@ public class Player_UsingHoldItem : MonoBehaviour
 
     void SwordAttack()
     {
+       
         player.GetComponent<Player>().canMove = false;
         swordAnim.SetTrigger("Stab");
         CheckTargets();
@@ -205,6 +208,10 @@ public class Player_UsingHoldItem : MonoBehaviour
                 {
                     tar[i].GetComponent<Breakable>().health--;
 
+                }
+                if (tar[i].GetComponent<Enemy>())
+                {
+                    tar[i].GetComponent<Enemy>().health--;
                 }
             }
             sword.GetComponent<TriggerCheck>().targets.Clear();
