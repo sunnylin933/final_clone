@@ -19,8 +19,10 @@ public class Player_UsingHoldItem : MonoBehaviour
     public Holdable hold;
 
     //Sword
-    public GameObject sword;
+    //public GameObject sword;
     public GameObject holdSword;
+    public GameObject swordAttackObject;
+
     Animator swordAnim;
     public float swordCDTime;
     float stabRange;
@@ -40,7 +42,7 @@ public class Player_UsingHoldItem : MonoBehaviour
         spCounter = 0;
         stabRange = 1.2f;
         player = GameObject.Find("Player");
-        swordAnim = sword.GetComponent<Animator>();
+        //swordAnim = sword.GetComponent<Animator>();
         wateringCanAnim=wateringCan.GetComponent<Animator>();
     }
 
@@ -128,11 +130,54 @@ public class Player_UsingHoldItem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X) && swordCD <= 0)
         {
             swordCD = swordCDTime;
-            stabRange = 1.2f;
-            swordAnim.SetTrigger("Stab");
-            player.GetComponent<Player>().canMove = false;
-            GameObject tar = sword.GetComponent<TriggerCheck>().tar_1;
-            if (tar != null)
+            stabRange = 1f;
+            //swordAnim.SetTrigger("Stab");
+            //player.GetComponent<Player>().canMove = false;
+            Vector3 position = new Vector3(player.transform.position.x, player.transform.position.y - stabRange, 0);
+            Quaternion rotation = new Quaternion();
+            string freeze = "y";
+
+            switch (dir)
+            {
+                case 2:
+                    position = new Vector3(player.transform.position.x, player.transform.position.y - stabRange, 0);
+                    rotation = new Quaternion(0,0,1f,0);
+                    freeze = "x";
+                    //castDir = Vector2.down;
+                    break;
+                case 4:
+                    position = new Vector3(player.transform.position.x - stabRange, player.transform.position.y, 0);
+                    rotation = new Quaternion(0, 0, 1f, 1f);
+                    freeze = "y";
+                    //castDir = Vector2.left;
+                    break;
+                case 6:
+                    position = new Vector3(player.transform.position.x + stabRange, player.transform.position.y, 0);
+                    rotation = new Quaternion(0, 0, 1f, -1f);
+                    freeze = "y";
+                    //castDir = Vector2.right;
+                    break;
+                case 8:
+                    position = new Vector3(player.transform.position.x, player.transform.position.y + stabRange, 0);
+                    rotation = new Quaternion();
+                    freeze = "x";
+                    //castDir = Vector2.up;
+                    break;
+            }
+
+            GameObject swd = GameObject.Instantiate(swordAttackObject, position, rotation);
+
+            if (freeze == "y")
+            {
+                swd.GetComponent<Rigidbody2D>().constraints= RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionY;
+            }
+            else
+            {
+                swd.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
+            }
+
+            //GameObject tar = sword.GetComponent<TriggerCheck>().tar_1;
+            /*if (tar != null)
             {
                 Debug.Log(tar.name);
                 if (tar.CompareTag("Wall"))
@@ -146,14 +191,14 @@ public class Player_UsingHoldItem : MonoBehaviour
                 }
                 //Do something with tar
                 sword.GetComponent<TriggerCheck>().tar_1 = null;
-            }
+            }*/
         }
-        else
+        /*else
         {
 
-            sword.GetComponent<TriggerCheck>().tar_1 = sword.GetComponent<TriggerCheck>().tar;
+            //sword.GetComponent<TriggerCheck>().tar_1 = sword.GetComponent<TriggerCheck>().tar;
 
-        }
+        }*/
 
         if (swordAnim.GetCurrentAnimatorStateInfo(0).IsName("Sword_Attack"))
         {
@@ -178,29 +223,29 @@ public class Player_UsingHoldItem : MonoBehaviour
                 holdSword.transform.localScale = new Vector3(1f, 1f, 1f);
                 break;
         }
-        switch (dir)
+        /*switch (dir)
         {
             case 2:
-                sword.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - stabRange, 0);
-                sword.transform.eulerAngles = new Vector3(0, 0, 180f);
+                //sword.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - stabRange, 0);
+                //sword.transform.eulerAngles = new Vector3(0, 0, 180f);
                 //castDir = Vector2.down;
                 break;
             case 4:
-                sword.transform.position = new Vector3(player.transform.position.x - stabRange, player.transform.position.y, 0);
-                sword.transform.eulerAngles = new Vector3(0, 0, 90f);
+                //sword.transform.position = new Vector3(player.transform.position.x - stabRange, player.transform.position.y, 0);
+                //sword.transform.eulerAngles = new Vector3(0, 0, 90f);
                 //castDir = Vector2.left;
                 break;
             case 6:
-                sword.transform.position = new Vector3(player.transform.position.x + stabRange, player.transform.position.y, 0);
-                sword.transform.eulerAngles = new Vector3(0, 0, -90f);
+                //sword.transform.position = new Vector3(player.transform.position.x + stabRange, player.transform.position.y, 0);
+                //sword.transform.eulerAngles = new Vector3(0, 0, -90f);
                 //castDir = Vector2.right;
                 break;
             case 8:
-                sword.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + stabRange, 0);
-                sword.transform.eulerAngles = new Vector3(0, 0, 0f);
+                //sword.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + stabRange, 0);
+                //sword.transform.eulerAngles = new Vector3(0, 0, 0f);
                 //castDir = Vector2.up;
                 break;
-        }
+        }*/
        
     }
 }
