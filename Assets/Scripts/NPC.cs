@@ -12,6 +12,7 @@ public class NPC : MonoBehaviour
     public GameObject dialoguePanel;
     public int index;
     public GameObject player;
+    public bool typing;
 
     public float wordSpeed;
     public bool playerIsClose;
@@ -25,9 +26,9 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckDistance();
+        
 
-        if(playerIsClose == true && Input.GetKeyDown(KeyCode.E))
+        if(playerIsClose == true && typing == false)
         {
             if (dialoguePanel.activeInHierarchy)
             {
@@ -35,6 +36,7 @@ public class NPC : MonoBehaviour
             }
             else
             {
+                typing = true;
                 dialoguePanel.SetActive(true);
                 StartCoroutine(Typing());
             }
@@ -58,23 +60,25 @@ public class NPC : MonoBehaviour
 
     public void zeroText()
     {
+        typing = false;
+        StopAllCoroutines();
         dialogueText.text = "";
         index = 0;
         dialoguePanel.SetActive(false);
     }
+    
     public void CheckDistance()
     {
-        if(Mathf.Abs(Vector2.Distance(player.transform.position , this.transform.position)) < detectRange)
-        {
-            playerIsClose = true;
-        }
-        else
+        if(Mathf.Abs(Vector2.Distance(player.transform.position , this.transform.position)) > detectRange)
         {
             playerIsClose = false;
+            typing = false;
             zeroText();
         }
+     
     }
-    /*
+    
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -90,15 +94,17 @@ public class NPC : MonoBehaviour
             zeroText();
         }
     }
-    */
+    
     public IEnumerator Typing()
     {
+
         foreach(char letter in dialogue[index].ToCharArray())
         {
-           
+            Debug.Log("ff");
             dialogueText.text += letter;
             yield return new WaitForSeconds(wordSpeed);
             
         }
+        
     }
 }

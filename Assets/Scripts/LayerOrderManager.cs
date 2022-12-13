@@ -17,6 +17,6 @@ public class LayerOrderManager : MonoBehaviour
             rend.sortingOrder = -(int)(GetComponent<Collider2D>().bounds.min.y * 1000);
         }*/
 
-       mRenderer.sortingOrder = -(int)(GetComponent<Collider2D>().bounds.min.y * 1000);
+       mRenderer.sortingOrder = -(int)(GetComponent<Collider2D>().bounds.min.y * 1000)/100;
     }
 }
