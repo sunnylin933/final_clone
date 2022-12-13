@@ -40,19 +40,54 @@ public class ToolManager : MonoBehaviour
             if (obj.tag != target)
             {
                 player.inventory.Remove(obj.info);
+                Vector3 pos = new Vector3(0, 0, 0);
+                float f;
+                if (player.face ==1)
+                {
+                    f = -1f;
+                }
+                else
+                {
+                    f = 1f;
+                }
+                if (player.hit_x)
+                {
+                    pos += new Vector3(-1f*f,0,0);
+                }
+                else
+                {
+                    pos += new Vector3(1f*f, 0, 0);
+
+                }
+                if (player.dir == 2)
+                {
+                    f = -1f;
+                }
+                else if(player.dir==8){
+                    f = 1f;
+                }
+                if (player.hit_y)
+                {
+                    pos += new Vector3(0, -1f*f, 0);
+                }
+                else
+                {
+                    pos += new Vector3(0, 1f*f, 0);
+
+                }
                 switch (obj.tag)
                 {
                     case ToolManagerObject.tags.Sword:
                         if (player.canAttack)
                         {
-                            Instantiate(obj.pickableObject, p.transform.position+new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
+                            Instantiate(obj.pickableObject, p.transform.position+pos, Quaternion.identity);
                         }
                         break;
 
                     case ToolManagerObject.tags.WateringCan:
                         if (player.canWater)
                         {
-                            Instantiate(obj.pickableObject, p.transform.position+ new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
+                            Instantiate(obj.pickableObject, p.transform.position+pos, Quaternion.identity);
                         }
                         break;
                 }

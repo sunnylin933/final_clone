@@ -5,7 +5,6 @@ using UnityEngine;
 public class Player_UsingHoldItem : MonoBehaviour
 {
     public GameObject player;
-    public GameObject swordObj;
     int dir;
     int face;
 
@@ -13,19 +12,22 @@ public class Player_UsingHoldItem : MonoBehaviour
     {
         None,
         Sword,
-        WateringCan
+        WateringCan,//TO DO: Change into "Watering Can"
+        Camera //Do we need camera?
     }
 
     public Holdable hold;
 
     //Sword
-    public GameObject sword;
+    //public GameObject sword;
     public GameObject holdSword;
+    public GameObject swordAttackObject;
+
     Animator swordAnim;
     public float swordCDTime;
-    float stabRange = 1.2f;
+    float stabRange;
     float spCounter;
-    float swordCD = 0;
+    float swordCD;
 
     //Watering Can
     public GameObject wateringCan;
@@ -36,9 +38,11 @@ public class Player_UsingHoldItem : MonoBehaviour
 
     void Start()
     {
+        swordCD = 0;
         spCounter = 0;
+        stabRange = 1.2f;
         player = GameObject.Find("Player");
-        swordAnim = sword.GetComponent<Animator>();
+        //swordAnim = sword.GetComponent<Animator>();
         wateringCanAnim=wateringCan.GetComponent<Animator>();
     }
 
@@ -49,21 +53,15 @@ public class Player_UsingHoldItem : MonoBehaviour
         face = player.GetComponent<Player>().face;
         switch (hold){
             case Holdable.Sword:
-                EnableSword();
-                CheckSwordDirection();
-                CheckSwordInput();
-                CheckCanMove();
-
-                if (swordCD > 0)
-                {
-                    swordCD -= Time.deltaTime;
-                }
+                wateringCan.GetComponent<SpriteRenderer>().enabled = false;
+                holdSword.GetComponent<SpriteRenderer>().enabled = true;
+                swordAttack();
                 break;
 
             case Holdable.WateringCan:
                 wateringCan.GetComponent<SpriteRenderer>().enabled = true;
                 holdSword.GetComponent<SpriteRenderer>().enabled = false;
-                Watering();
+                watering();
                 break;
             default:
                 wateringCan.GetComponent<SpriteRenderer>().enabled = false;
@@ -71,10 +69,20 @@ public class Player_UsingHoldItem : MonoBehaviour
                 break;
         }
     }
-    void Watering()
+    void watering()
     {
-        CheckFacingDirection();
+        switch (face)
+        {
+            case 1:
+                wateringCan.transform.position = new Vector3(player.transform.position.x - 0.38f, player.transform.position.y + 0.007f, 0);
+                wateringCan.transform.localScale = new Vector3(1f, 1f, 1f);
+                break;
 
+            case 2:
+                wateringCan.transform.position = new Vector3(player.transform.position.x+0.38f, player.transform.position.y +0.007f, 0);
+                wateringCan.transform.localScale = new Vector3(-1f,1f,1f);
+                break;
+        }
         if (Input.GetKey(KeyCode.X) )
         {
             player.GetComponent<Player>().canMove = false;
@@ -113,36 +121,85 @@ public class Player_UsingHoldItem : MonoBehaviour
         }
     }
 
-
-    //Sword Methods
-    public void EnableSword()
+    void swordAttack()
     {
-        wateringCan.GetComponent<SpriteRenderer>().enabled = false;
-        holdSword.GetComponent<SpriteRenderer>().enabled = true;
-    }
-    public void CheckSwordInput()
-    {
-        if (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        if (swordCD > 0)
         {
-            if (swordCD <= 0)
-            {
-                
-                SwordAttack();
-            }
+            swordCD -= Time.deltaTime;
         }
-    }
+        if (Input.GetKeyDown(KeyCode.X) && swordCD <= 0)
+        {
+            swordCD = swordCDTime;
+            stabRange = 1f;
+            //swordAnim.SetTrigger("Stab");
+            //player.GetComponent<Player>().canMove = false;
+            Vector3 position = new Vector3(player.transform.position.x, player.transform.position.y - stabRange, 0);
+            Quaternion rotation = new Quaternion();
+            string freeze = "y";
 
-    void SwordAttack()
-    {
-       
-        player.GetComponent<Player>().canMove = false;
-        swordAnim.SetTrigger("Stab");
-        CheckTargets();
-        swordCD = swordCDTime;
-    }
+            switch (dir)
+            {
+                case 2:
+                    position = new Vector3(player.transform.position.x, player.transform.position.y - stabRange, 0);
+                    rotation = new Quaternion(0,0,1f,0);
+                    freeze = "x";
+                    //castDir = Vector2.down;
+                    break;
+                case 4:
+                    position = new Vector3(player.transform.position.x - stabRange, player.transform.position.y, 0);
+                    rotation = new Quaternion(0, 0, 1f, 1f);
+                    freeze = "y";
+                    //castDir = Vector2.left;
+                    break;
+                case 6:
+                    position = new Vector3(player.transform.position.x + stabRange, player.transform.position.y, 0);
+                    rotation = new Quaternion(0, 0, 1f, -1f);
+                    freeze = "y";
+                    //castDir = Vector2.right;
+                    break;
+                case 8:
+                    position = new Vector3(player.transform.position.x, player.transform.position.y + stabRange, 0);
+                    rotation = new Quaternion();
+                    freeze = "x";
+                    //castDir = Vector2.up;
+                    break;
+            }
 
-    public void CheckCanMove()
-    {
+            GameObject swd = GameObject.Instantiate(swordAttackObject, position, rotation);
+
+            if (freeze == "y")
+            {
+                swd.GetComponent<Rigidbody2D>().constraints= RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionY;
+            }
+            else
+            {
+                swd.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
+            }
+
+            //GameObject tar = sword.GetComponent<TriggerCheck>().tar_1;
+            /*if (tar != null)
+            {
+                Debug.Log(tar.name);
+                if (tar.CompareTag("Wall"))
+                {
+                    stabRange = 1.035f;
+                }
+                if (tar.GetComponent<Breakable>())
+                {
+                    tar.GetComponent<Breakable>().health--;
+
+                }
+                //Do something with tar
+                sword.GetComponent<TriggerCheck>().tar_1 = null;
+            }*/
+        }
+        /*else
+        {
+
+            //sword.GetComponent<TriggerCheck>().tar_1 = sword.GetComponent<TriggerCheck>().tar;
+
+        }*/
+
         if (swordAnim.GetCurrentAnimatorStateInfo(0).IsName("Sword_Attack"))
         {
             holdSword.GetComponent<SpriteRenderer>().enabled = false;
@@ -153,10 +210,7 @@ public class Player_UsingHoldItem : MonoBehaviour
             holdSword.GetComponent<SpriteRenderer>().enabled = true;
             player.GetComponent<Player>().canMove = true;
         }
-    }
 
-    public void CheckSwordDirection()
-    {
         switch (face)
         {
             case 1:
@@ -165,74 +219,34 @@ public class Player_UsingHoldItem : MonoBehaviour
                 break;
 
             case 2:
-                holdSword.transform.position = new Vector3(player.transform.position.x - 0.312f, player.transform.position.y + 0.263f, 0);
+                holdSword.transform.position = new Vector3(player.transform.position.x -0.312f, player.transform.position.y + 0.263f, 0);
                 holdSword.transform.localScale = new Vector3(1f, 1f, 1f);
                 break;
         }
-        switch (dir)
+        /*switch (dir)
         {
             case 2:
-                sword.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - stabRange, 0);
-                sword.transform.eulerAngles = new Vector3(0, 0, 180f);
+                //sword.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - stabRange, 0);
+                //sword.transform.eulerAngles = new Vector3(0, 0, 180f);
                 //castDir = Vector2.down;
                 break;
             case 4:
-                sword.transform.position = new Vector3(player.transform.position.x - stabRange, player.transform.position.y, 0);
-                sword.transform.eulerAngles = new Vector3(0, 0, 90f);
+                //sword.transform.position = new Vector3(player.transform.position.x - stabRange, player.transform.position.y, 0);
+                //sword.transform.eulerAngles = new Vector3(0, 0, 90f);
                 //castDir = Vector2.left;
                 break;
             case 6:
-                sword.transform.position = new Vector3(player.transform.position.x + stabRange, player.transform.position.y, 0);
-                sword.transform.eulerAngles = new Vector3(0, 0, -90f);
+                //sword.transform.position = new Vector3(player.transform.position.x + stabRange, player.transform.position.y, 0);
+                //sword.transform.eulerAngles = new Vector3(0, 0, -90f);
                 //castDir = Vector2.right;
                 break;
             case 8:
-                sword.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + stabRange, 0);
-                sword.transform.eulerAngles = new Vector3(0, 0, 0f);
+                //sword.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + stabRange, 0);
+                //sword.transform.eulerAngles = new Vector3(0, 0, 0f);
                 //castDir = Vector2.up;
                 break;
-        }
-    }
-    public void CheckTargets()
-    {
-        List<GameObject> tar = sword.GetComponent<TriggerCheck>().targets;
-        if (tar != null)
-        {
-            for (int i = 0; i < tar.Count; i++)
-            {
-                if (tar[i].CompareTag("Wall"))
-                {
-                    stabRange = 1.035f;
-                }
-                if (tar[i].GetComponent<Breakable>())
-                {
-                    tar[i].GetComponent<Breakable>().health--;
-
-                }
-                if (tar[i].GetComponent<Enemy>())
-                {
-                    tar[i].GetComponent<Enemy>().health--;
-                }
-            }
-            sword.GetComponent<TriggerCheck>().targets.Clear();
-        }
-    }
-
-    //Watering Can Methods
-    public void CheckFacingDirection()
-    {
-        switch (face)
-        {
-            case 1:
-                wateringCan.transform.position = new Vector3(player.transform.position.x - 0.38f, player.transform.position.y + 0.007f, 0);
-                wateringCan.transform.localScale = new Vector3(1f, 1f, 1f);
-                break;
-
-            case 2:
-                wateringCan.transform.position = new Vector3(player.transform.position.x + 0.38f, player.transform.position.y + 0.007f, 0);
-                wateringCan.transform.localScale = new Vector3(-1f, 1f, 1f);
-                break;
-        }
+        }*/
+       
     }
 }
 
