@@ -21,6 +21,13 @@ public class NPC : MonoBehaviour
     void Start()
     {
         
+        if(GameManager.gameState == 1)
+        {
+            if(this.gameObject.name == "alligator")
+            {
+                dialogue[0] = "SO GLAD THOSE CRABS ARE GONE!";
+            }
+        }
     }
 
     // Update is called once per frame

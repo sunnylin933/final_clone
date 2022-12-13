@@ -17,12 +17,17 @@ public class ItemPickup : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
+            if(gameObject.name == "PickableSword")
+            {
+                Debug.Log("fdf");
+                GameManager.gameState = 0;
+            }
             var player = collision.gameObject.GetComponent<Player>();
             //add this item to UI
             //unlock abilities on player by adding them to Player Inventory
             player.inventory.Add(itemInfo);
             player.UnlockAbility();
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }

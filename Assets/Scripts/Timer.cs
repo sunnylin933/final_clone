@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    public static bool isViewable = true;
+    public static bool isViewable = false;
     public float currentTime;
     public float startTime;
     public bool timerStarted;
@@ -32,11 +32,11 @@ public class Timer : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Slash)) timerStarted = true;
+       
 
         if (isViewable)
         {
-           
+            timer.SetActive(true);
 
             if (timerStarted)
             {

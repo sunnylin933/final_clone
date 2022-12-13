@@ -8,6 +8,7 @@ public class RoomChange : MonoBehaviour
     public Camera currentCamera;
     public GameObject targetMap;
     public GameObject currentMap;
+    public bool needskey = false;
     public bool outside;
  
 
@@ -18,12 +19,25 @@ public class RoomChange : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Asdf");
-            outside = true;
-            targetMap.SetActive(true);
-            currentMap.SetActive(false);
+            if (needskey == false)
+            {
+                Debug.Log("Asdf");
+                outside = true;
+                targetMap.SetActive(true);
+                currentMap.SetActive(false);
+            }
+            else
+            {
+                if(collision.gameObject.GetComponent<Player>().canOpen == true)
+                {
+                    outside = true;
+                    targetMap.SetActive(true);
+                    currentMap.SetActive(false);
+                }
+            }
            
         }
+        /*
         else if (collision.gameObject.CompareTag("Player"))
         {
             outside = false;
@@ -37,7 +51,7 @@ public class RoomChange : MonoBehaviour
         }
 
 
-
+        */
 
 
     }
