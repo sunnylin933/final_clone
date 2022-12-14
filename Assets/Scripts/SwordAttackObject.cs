@@ -21,6 +21,7 @@ public class SwordAttackObject : MonoBehaviour
     private IEnumerator DestroyAfterPlayingAnim()
     {
         yield return new WaitForSeconds(stayTime);
+        GameObject.Find("Player").GetComponent<Player>().canMove = true;
         Destroy(gameObject);
     }
 
