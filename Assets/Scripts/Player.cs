@@ -66,6 +66,8 @@ public class Player : MonoBehaviour
                 }
                 transform.position = new Vector3(3, -1.35f, 0);
                 cam.transform.position = new Vector3(0, -0.5f, -10);
+                timer.GetComponent<Timer>().timerStarted = true;
+                timer.GetComponent<Timer>().currentTime = timer.GetComponent<Timer>().startTime;
                 canMove = true;
                 animator.SetBool("isDead", false);
                 isDead = false;
@@ -76,8 +78,8 @@ public class Player : MonoBehaviour
         {
             timer.GetComponent<AudioSource>().Play();
             timer.GetComponent<Timer>().timerStarted = false;
-            isDead = true;
             animator.SetBool("isDead", true);
+            isDead = true;
         }
 
         if (canWater == true)

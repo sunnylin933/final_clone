@@ -20,8 +20,7 @@ public class GameManager : MonoBehaviour
 
         if(gameState == 0)
         {
-            Timer.isViewable = true;
-            timer.timerStarted = true;
+            
         }
        if(crab >= 5)
         {

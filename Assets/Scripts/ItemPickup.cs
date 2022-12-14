@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ItemPickup : MonoBehaviour
 {
+    public GameManager gm;
     /*
      * General Usage: Attatch this script on an item sprite and feed a itemInfo scriptable object. When player picks up the item
      * it will automatically be added into the UI (player will be able to view what item they have) and player's inventory.
@@ -20,6 +21,7 @@ public class ItemPickup : MonoBehaviour
             if(gameObject.name == "PickableSword")
             {
                 Debug.Log("fdf");
+                gm.timer.timerStarted = true;
                 GameManager.gameState = 0;
             }
             var player = collision.gameObject.GetComponent<Player>();
