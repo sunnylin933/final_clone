@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     //Player Animation
     public Animator animator;
 
-    //Player movement
+    //Player Movement
     private RaycastHit2D hit;
     private string[] raycastLayers;
     private LayerMask raycastMask;
@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     public float moveSpeed;
 
     //Player Ability
+    public bool isDead;
     public bool canPush;
     public bool canAttack;
     public bool canWater;
@@ -30,6 +31,10 @@ public class Player : MonoBehaviour
     public List<ItemInfo> inventory = new List<ItemInfo>();
 
     //Transform or etc related to player
+    public GameObject cam;
+    public GameObject[] roomsActive;
+    public GameObject[] roomsInactive;
+    public GameObject timer;
     public GameObject wateringLocation;
 
     //Raycast 
@@ -45,6 +50,35 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(isDead)
+        {
+            canMove = false;
+            animator.SetBool("isDead", true);
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                for(int i = 0; i < roomsActive.Length; i++)
+                {
+                    roomsActive[i].gameObject.SetActive(true);
+                }
+                for (int i = 0; i < roomsInactive.Length; i++)
+                {
+                    roomsInactive[i].gameObject.SetActive(false);
+                }
+                transform.position = new Vector3(3, -1.35f, 0);
+                cam.transform.position = new Vector3(0, -0.5f, -10);
+                canMove = true;
+                animator.SetBool("isDead", false);
+                isDead = false;
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.C) && canAttack)
+        {
+            timer.GetComponent<AudioSource>().Play();
+            timer.GetComponent<Timer>().timerStarted = false;
+            isDead = true;
+            animator.SetBool("isDead", true);
+        }
 
         if (canWater == true)
         {

@@ -83,7 +83,7 @@ public class Player_UsingHoldItem : MonoBehaviour
                 wateringCan.transform.localScale = new Vector3(-1f,1f,1f);
                 break;
         }
-        if (Input.GetKey(KeyCode.X) )
+        if (Input.GetKey(KeyCode.X) && !player.GetComponent<Player>().isDead)
         {
             player.GetComponent<Player>().canMove = false;
             wateringCanAnim.SetBool("IsWatering",true);
@@ -137,7 +137,7 @@ public class Player_UsingHoldItem : MonoBehaviour
         {
             swordCD -= Time.deltaTime;
         }
-        if (Input.GetKeyDown(KeyCode.X) && swordCD <= 0)
+        if (Input.GetKeyDown(KeyCode.X) && swordCD <= 0 && !player.GetComponent<Player>().isDead)
         {
             swordCD = swordCDTime;
             stabRange = 1f;

@@ -31,38 +31,27 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-       
-
-        if (isViewable)
+        if (timerStarted)
         {
-            timer.SetActive(true);
+            int time = (int)(60 - currentTime % 60);
 
-            if (timerStarted)
+            if (time > 0)
             {
-                int time = (int)(60 - currentTime % 60);
-
-                if (time > 0)
-                {
-                    currentTime += Time.deltaTime;
-                }
-                else
-                {
-                    //Time end/day end event
-                    Debug.Log("Times Up!");
-                    timerStarted = false;
-                    currentTime = 0;
-                    player.transform.position = new Vector3(0, 0, 0);
-                    date++;
-                    makeGrowableAgain();
-                }
-
-                timerText.text = time.ToString();
+                currentTime += Time.deltaTime;
             }
-        }
-       else
-        {
-            timer.SetActive(false);
+            else
+            {
+                    //Time end/day end event
+                Debug.Log("Times Up!");
+                timerStarted = false;
+                currentTime = 0;
+                GetComponent<AudioSource>().Play();
+                player.GetComponent<Player>().isDead = true;
+                date++;
+                makeGrowableAgain();
+            }
+
+            timerText.text = time.ToString();
         }
     }
 

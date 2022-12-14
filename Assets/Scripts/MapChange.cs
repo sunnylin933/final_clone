@@ -26,13 +26,13 @@ public class MapChange : MonoBehaviour
         {
             if(horizontal)
             {
-                if (Input.GetKey(KeyCode.A))
+                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
                 {
                     main.transform.position -= horizontalOffset;
                     //collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y, -7f);
                     player.transform.position = new Vector3(player.transform.position.x - 2, player.transform.position.y, player.transform.position.z);
                 }
-                if (Input.GetKey(KeyCode.D))
+                if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
                 {
                     main.transform.position += horizontalOffset;
                     //collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y, -7f);
@@ -43,14 +43,14 @@ public class MapChange : MonoBehaviour
 
             if(vertical)
             {
-                if (Input.GetKey(KeyCode.S))
+                if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
                 {
                     main.transform.position -= verticalOffset;
                     collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y, 7f);
                     player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - 2, player.transform.position.z);
                 }
 
-                if (Input.GetKey(KeyCode.W))
+                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
                 {
                     main.transform.position += verticalOffset;
                     collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y, -7f);
