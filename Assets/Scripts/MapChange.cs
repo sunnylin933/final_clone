@@ -45,6 +45,7 @@ public class MapChange : MonoBehaviour
 
             if(vertical)
             {
+
                 float v = Input.GetAxisRaw("Vertical");
                 if (v<0)//Input.GetKey(KeyCode.S)
                 {
@@ -54,6 +55,7 @@ public class MapChange : MonoBehaviour
                 }
 
                 if (v>0)//Input.GetKey(KeyCode.W)
+
                 {
                     main.transform.position += verticalOffset;
                     collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y, -7f);

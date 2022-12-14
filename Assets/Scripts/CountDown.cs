@@ -12,11 +12,14 @@ public class CountDown : MonoBehaviour
     //public TextMeshPro timerUI; TMPro not working for unknown reason
     public Text timerUI;
     public GameObject player;
+
+
     
     void Start()
     {
         isCounting = false;
         counter = 0;
+
     }
 
     void Update()
@@ -40,4 +43,6 @@ public class CountDown : MonoBehaviour
             timerUI.text = time.ToString();
         }
     }
+
+
 }

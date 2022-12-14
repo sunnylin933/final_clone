@@ -7,6 +7,9 @@ TagManager:
   - WaterParticle
   - Wall
   - Sword
+  - Sprout
+  - Crab
+  - Holding
   layers:
   - Default
   - TransparentFX
@@ -16,7 +19,7 @@ TagManager:
   - UI
   - Actor
   - Player
-  - 
+  - swordnoeffect
   - 
   - 
   - 
@@ -52,4 +55,7 @@ TagManager:
     locked: 0
   - name: Flashlight
     uniqueID: 473516809
+    locked: 0
+  - name: Particle
+    uniqueID: 3438295607
     locked: 0

@@ -12,6 +12,8 @@ public class NPC : MonoBehaviour
     public GameObject dialoguePanel;
     public int index;
     public GameObject player;
+    public bool typing;
+    public Transform dialoguePosition;
 
     public float wordSpeed;
     public bool playerIsClose;
@@ -20,14 +22,21 @@ public class NPC : MonoBehaviour
     void Start()
     {
         
+        if(GameManager.gameState == 1)
+        {
+            if(this.gameObject.name == "alligator")
+            {
+                dialogue[0] = "SO GLAD THOSE CRABS ARE GONE!";
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckDistance();
+        
 
-        if(playerIsClose == true && Input.GetKeyDown(KeyCode.E))
+        if(playerIsClose == true && typing == false)
         {
             if (dialoguePanel.activeInHierarchy)
             {
@@ -35,7 +44,9 @@ public class NPC : MonoBehaviour
             }
             else
             {
+                typing = true;
                 dialoguePanel.SetActive(true);
+                dialoguePanel.transform.position = dialoguePosition.position;
                 StartCoroutine(Typing());
             }
         }
@@ -58,23 +69,25 @@ public class NPC : MonoBehaviour
 
     public void zeroText()
     {
+        typing = false;
+        StopAllCoroutines();
         dialogueText.text = "";
         index = 0;
         dialoguePanel.SetActive(false);
     }
+    
     public void CheckDistance()
     {
-        if(Mathf.Abs(Vector2.Distance(player.transform.position , this.transform.position)) < detectRange)
-        {
-            playerIsClose = true;
-        }
-        else
+        if(Mathf.Abs(Vector2.Distance(player.transform.position , this.transform.position)) > detectRange)
         {
             playerIsClose = false;
+            typing = false;
             zeroText();
         }
+     
     }
-    /*
+    
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -90,15 +103,17 @@ public class NPC : MonoBehaviour
             zeroText();
         }
     }
-    */
+    
     public IEnumerator Typing()
     {
+
         foreach(char letter in dialogue[index].ToCharArray())
         {
-           
+            Debug.Log("ff");
             dialogueText.text += letter;
             yield return new WaitForSeconds(wordSpeed);
             
         }
+        
     }
 }

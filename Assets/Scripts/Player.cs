@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
     public bool canPush;
     public bool canAttack;
     public bool canWater;
+    public bool canOpen;
+    public bool canLight;
     public List<ItemInfo> inventory = new List<ItemInfo>();
 
     //Transform or etc related to player
@@ -36,7 +38,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        raycastLayers = new string[] { "Blocking", "Actor" };
+        raycastLayers = new string[] { "Blocking", "Actor", "Water" };
         raycastMask = LayerMask.GetMask(raycastLayers);
     }
 
@@ -94,7 +96,7 @@ public class Player : MonoBehaviour
             Debug.DrawRay(new Vector2(transform.position.x, transform.position.y - 0.25f), new Vector2(0, moveDelta.y) * 2, Color.green);
             if (hit_y.transform == null)
             {
-                transform.Translate(0, moveSpeed * moveDelta.y * Time.deltaTime, 0);
+                transform.Translate(0, moveSpeed * moveDelta.y * Time.deltaTime, moveSpeed * moveDelta.y * Time.deltaTime);
             }
 
         }
@@ -117,6 +119,15 @@ public class Player : MonoBehaviour
             {
                 this.canWater = true;
             }
+            if(inventory[i].unlockAbility == "canOpen")
+            {
+                this.canOpen = true;
+            }
+            if(inventory[i].unlockAbility == "canLight")
+            {
+                this.canLight = true;
+            }
+            
         }
 
     }

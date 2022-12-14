@@ -6,6 +6,7 @@ public class TriggerCheck : MonoBehaviour
 {
     public GameObject tar;
     public GameObject tar_1;
+    public List<GameObject> targets = new List<GameObject>();
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class TriggerCheck : MonoBehaviour
         if (collision && !collision.CompareTag("WaterParticle"))
         {
             tar = collision.gameObject;
+            targets.Add(collision.gameObject);
         }
 
     }
@@ -39,6 +41,7 @@ public class TriggerCheck : MonoBehaviour
     {
         tar = null;
         tar_1 = null;
+        targets.Clear();
     }
 
 

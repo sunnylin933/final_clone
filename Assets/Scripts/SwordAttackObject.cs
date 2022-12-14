@@ -21,6 +21,7 @@ public class SwordAttackObject : MonoBehaviour
     private IEnumerator DestroyAfterPlayingAnim()
     {
         yield return new WaitForSeconds(stayTime);
+        GameObject.Find("Player").GetComponent<Player>().canMove = true;
         Destroy(gameObject);
     }
 
@@ -33,6 +34,14 @@ public class SwordAttackObject : MonoBehaviour
             {
                 collision.gameObject.GetComponent<Breakable>().health -= damage;
             }
+           
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<Enemy>())
+        {
+            collision.gameObject.GetComponent<Enemy>().health -= damage;
         }
     }
 }
