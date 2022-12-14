@@ -132,7 +132,7 @@ public class Player_UsingHoldItem : MonoBehaviour
             swordCD = swordCDTime;
             stabRange = 1f;
             //swordAnim.SetTrigger("Stab");
-            //player.GetComponent<Player>().canMove = false;
+            player.GetComponent<Player>().canMove = false;
             Vector3 position = new Vector3(player.transform.position.x, player.transform.position.y - stabRange, 0);
             Quaternion rotation = new Quaternion();
             string freeze = "y";
