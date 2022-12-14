@@ -13,6 +13,7 @@ public class NPC : MonoBehaviour
     public int index;
     public GameObject player;
     public bool typing;
+    public Transform dialoguePosition;
 
     public float wordSpeed;
     public bool playerIsClose;
@@ -45,6 +46,7 @@ public class NPC : MonoBehaviour
             {
                 typing = true;
                 dialoguePanel.SetActive(true);
+                dialoguePanel.transform.position = dialoguePosition.position;
                 StartCoroutine(Typing());
             }
         }

@@ -9,7 +9,9 @@ public class RoomChange : MonoBehaviour
     public GameObject targetMap;
     public GameObject currentMap;
     public bool needskey = false;
+    public bool temple = false;
     public bool outside;
+    public bool goingOut;
  
 
 
@@ -17,15 +19,47 @@ public class RoomChange : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(goingOut == true)
+        {
+            collision.gameObject.GetComponent<Flashlight>().isDark = false;
+            
+
+        }
         if (collision.gameObject.CompareTag("Player"))
         {
             if (needskey == false)
             {
-                Debug.Log("Asdf");
-                outside = true;
-                targetMap.SetActive(true);
-                currentMap.SetActive(false);
+                if(temple == false)
+                {
+                    
+                    outside = true;
+                    targetMap.SetActive(true);
+                    currentMap.SetActive(false);
+
+                }
+                if(temple == true)
+                {
+                    if(collision.gameObject.GetComponent<Player>().canLight == true)
+                    {
+                        collision.gameObject.GetComponent<Flashlight>().isDark = true;
+                        collision.gameObject.GetComponent<Flashlight>().haveFlashlight = true;
+                        outside = true;
+                        targetMap.SetActive(true);
+                        currentMap.SetActive(false);
+                    }
+                    else
+                    {
+                        collision.gameObject.GetComponent<Flashlight>().isDark = true;
+                        outside = true;
+                        targetMap.SetActive(true);
+                        currentMap.SetActive(false);
+
+                    }
+                    
+                }
+              
             }
+           
             else
             {
                 if(collision.gameObject.GetComponent<Player>().canOpen == true)

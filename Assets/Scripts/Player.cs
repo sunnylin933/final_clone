@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     public bool canAttack;
     public bool canWater;
     public bool canOpen;
+    public bool canLight;
     public List<ItemInfo> inventory = new List<ItemInfo>();
 
     //Transform or etc related to player
@@ -122,6 +123,11 @@ public class Player : MonoBehaviour
             {
                 this.canOpen = true;
             }
+            if(inventory[i].unlockAbility == "canLight")
+            {
+                this.canLight = true;
+            }
+            
         }
 
     }

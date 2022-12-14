@@ -33,10 +33,14 @@ public class SwordAttackObject : MonoBehaviour
             {
                 collision.gameObject.GetComponent<Breakable>().health -= damage;
             }
-            if (collision.gameObject.GetComponent<Enemy>())
-            {
-                collision.gameObject.GetComponent<Enemy>().health -= damage;
-            }
+           
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<Enemy>())
+        {
+            collision.gameObject.GetComponent<Enemy>().health -= damage;
         }
     }
 }

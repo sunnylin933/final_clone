@@ -44,14 +44,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    /*
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Sword")
+        if(collision.tag == "Player")
         {
-            health--;
+            collision.gameObject.GetComponent<Player>().health--;
            
         }
     }
-    */
+    
 }
