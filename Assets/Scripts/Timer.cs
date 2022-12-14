@@ -6,6 +6,7 @@ using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCou
 
 public class Timer : MonoBehaviour
 {
+    public Camera main;
     public static bool isViewable = false;
     public float currentTime;
     public float startTime;
@@ -39,9 +40,50 @@ public class Timer : MonoBehaviour
 
             if (time > 0)
             {
+<<<<<<< Updated upstream
                 currentTime += Time.deltaTime;
             }
             else
+=======
+                int time = (int)(60 - currentTime % 60);
+
+                if (time <=0 || Input.GetKeyUp(KeyCode.C))
+                {
+                    //Time end/day end event
+                    TimeUpEvents();
+                }
+                else
+                {
+                    currentTime += Time.deltaTime;
+                }
+
+
+                timerText.text = time.ToString();
+            }
+        }
+       else
+        {
+            timer.SetActive(false);
+        }
+    }
+
+    void TimeUpEvents()
+    {
+        Debug.Log("Times Up!");
+        timerStarted = false;
+        currentTime = 0;
+        player.transform.position = new Vector3(0, 0, 0);
+        date++;
+        makeGrowableAgain();
+        main.transform.position = new Vector3(0,0,0);
+    }
+
+    void makeGrowableAgain()
+    {
+        foreach (GameObject obj in everydayGrowable)
+        {
+            if (obj.GetComponent<Growable>())
+>>>>>>> Stashed changes
             {
                 //Time end/day end event
                 Debug.Log("Times Up!");
