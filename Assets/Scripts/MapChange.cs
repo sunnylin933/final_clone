@@ -24,15 +24,17 @@ public class MapChange : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if(horizontal)
+            float h = Input.GetAxisRaw("Horizontal");
+            if (horizontal)
             {
-                if (Input.GetKey(KeyCode.A))
+                if (h<0)
                 {
+                    //Input.GetKey(KeyCode.A)
                     main.transform.position -= horizontalOffset;
                     //collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y, -7f);
                     player.transform.position = new Vector3(player.transform.position.x - 2, player.transform.position.y, player.transform.position.z);
                 }
-                if (Input.GetKey(KeyCode.D))
+                if (h>0)//Input.GetKey(KeyCode.D)
                 {
                     main.transform.position += horizontalOffset;
                     //collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y, -7f);
@@ -43,14 +45,17 @@ public class MapChange : MonoBehaviour
 
             if(vertical)
             {
-                if (Input.GetKey(KeyCode.S))
+
+                float v = Input.GetAxisRaw("Vertical");
+                if (v<0)//Input.GetKey(KeyCode.S)
                 {
                     main.transform.position -= verticalOffset;
                     collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y, 7f);
                     player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - 2, player.transform.position.z);
                 }
 
-                if (Input.GetKey(KeyCode.W))
+                if (v>0)//Input.GetKey(KeyCode.W)
+
                 {
                     main.transform.position += verticalOffset;
                     collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y, -7f);

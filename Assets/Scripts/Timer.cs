@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
+    public Camera main;
     public static bool isViewable = false;
     public float currentTime;
     public float startTime;
@@ -40,22 +41,21 @@ public class Timer : MonoBehaviour
 
             if (timerStarted)
             {
+                currentTime += Time.deltaTime;
+            }
+            else
                 int time = (int)(60 - currentTime % 60);
 
-                if (time > 0)
+                if (time <=0 || Input.GetKeyUp(KeyCode.C))
                 {
-                    currentTime += Time.deltaTime;
+                    //Time end/day end event
+                    TimeUpEvents();
                 }
                 else
                 {
-                    //Time end/day end event
-                    Debug.Log("Times Up!");
-                    timerStarted = false;
-                    currentTime = 0;
-                    player.transform.position = new Vector3(0, 0, 0);
-                    date++;
-                    makeGrowableAgain();
+                    currentTime += Time.deltaTime;
                 }
+
 
                 timerText.text = time.ToString();
             }
@@ -66,11 +66,17 @@ public class Timer : MonoBehaviour
         }
     }
 
-    void makeGrowableAgain()
+    void TimeUpEvents()
     {
-        foreach (GameObject obj in everydayGrowable)
-        {
-            if (obj.GetComponent<Growable>())
+        Debug.Log("Times Up!");
+        timerStarted = false;
+        currentTime = 0;
+        player.transform.position = new Vector3(0, 0, 0);
+        date++;
+        makeGrowableAgain();
+        main.transform.position = new Vector3(0,0,0);
+    }
+
             {
                 obj.GetComponent<Growable>().waterable = true;
             }
