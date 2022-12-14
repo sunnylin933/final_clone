@@ -89,23 +89,33 @@ public class Player_UsingHoldItem : MonoBehaviour
             wateringCanAnim.SetBool("IsWatering",true);
 
             //Generate Water Particle
-            float particleSpeedUp = 50f;
+            float particleSpeedUp = 25f;
             float particleSpeed = 100f;
+            float particleX = 0.5f;
             GameObject particle;
+            switch (face)
+            {
+                case 1:
+                    particleX = -0.5f;
+                    break;
+                case 2:
+                    particleX = 0.5f;
+                    break;
+            }
             spCounter+=Time.deltaTime*1;
             if (spCounter> waterInterval)
             {
                 spCounter = 0;
                 //Modifu "WaterParticle_SP" to make watering effect
-                particle = Instantiate(specialParticle, new Vector3(wateringCan.transform.position.x, wateringCan.transform.position.y - 0.01f, transform.position.z), transform.rotation);
+                particle = Instantiate(specialParticle, new Vector3(wateringCan.transform.position.x+ particleX, wateringCan.transform.position.y - 0.1f, transform.position.z), transform.rotation);
             }
             else
             {
-                particle = Instantiate(waterParticle, new Vector3(wateringCan.transform.position.x, wateringCan.transform.position.y - 0.01f, transform.position.z), transform.rotation);
+                particle = Instantiate(waterParticle, new Vector3(wateringCan.transform.position.x+ particleX, wateringCan.transform.position.y - 0.1f, transform.position.z), transform.rotation);
             }
             if (face==1)
             {
-                particleSpeed = -100f;
+                particleSpeed = -particleSpeed;
             }
 
             particle.GetComponent<Rigidbody2D>().AddForce(transform.right * particleSpeed*Random.Range(0.8f,1.2f));
@@ -200,7 +210,7 @@ public class Player_UsingHoldItem : MonoBehaviour
 
         }*/
 
-        if (swordAnim.GetCurrentAnimatorStateInfo(0).IsName("Sword_Attack"))
+        /*if (swordAnim.GetCurrentAnimatorStateInfo(0).IsName("Sword_Attack"))
         {
             holdSword.GetComponent<SpriteRenderer>().enabled = false;
             player.GetComponent<Player>().canMove = false;
@@ -209,7 +219,7 @@ public class Player_UsingHoldItem : MonoBehaviour
         {
             holdSword.GetComponent<SpriteRenderer>().enabled = true;
             player.GetComponent<Player>().canMove = true;
-        }
+        }*/
 
         switch (face)
         {
