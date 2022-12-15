@@ -10,6 +10,7 @@ TagManager:
   - Sprout
   - Crab
   - Holding
+  - Respawnable
   layers:
   - Default
   - TransparentFX
