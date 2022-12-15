@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 8302529711516181767}
   - component: {fileID: 8900231650099231684}
   - component: {fileID: 8485783993650047095}
+  - component: {fileID: 7278287714622129594}
   m_Layer: 6
   m_Name: Pot
-  m_TagString: Untagged
+  m_TagString: Respawnable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 99207215a4b0db54b906f0ca89d34127, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8e381efc6a8ed194aa299e9b4812ea9d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -133,3 +134,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &7278287714622129594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8727103174974291494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1839c5d8b5896f04c867176c8bdb2d2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1
+  canDelete: 0
+  isDestroyed: 0
+  destroyedSprites:
+  - {fileID: 21300000, guid: a72e5a0028a864740aa1767d4d61b3b7, type: 3}

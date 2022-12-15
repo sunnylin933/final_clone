@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9116749357176569261}
   m_Layer: 3
   m_Name: Bush
-  m_TagString: Untagged
+  m_TagString: Respawnable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,3 +125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
+  canDelete: 0
+  isDestroyed: 0
+  destroyedSprites:
+  - {fileID: -352812192, guid: d8beb49a1e33e2045b734c5f90691d2d, type: 3}
+  - {fileID: 1380160374, guid: d8beb49a1e33e2045b734c5f90691d2d, type: 3}

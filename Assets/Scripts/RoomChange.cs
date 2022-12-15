@@ -6,8 +6,8 @@ public class RoomChange : MonoBehaviour
 {
     public Camera targetCamera;
     public Camera currentCamera;
-    public GameObject targetMap;
-    public GameObject currentMap;
+    public GameObject[] targetMap;
+    public GameObject[] currentMap;
     public bool needskey = false;
     public bool temple = false;
     public bool outside;
@@ -33,8 +33,14 @@ public class RoomChange : MonoBehaviour
                 {
                     
                     outside = true;
-                    targetMap.SetActive(true);
-                    currentMap.SetActive(false);
+                    for (int i = 0; i < targetMap.Length; i++)
+                    {
+                        targetMap[i].SetActive(true);
+                    }
+                    for (int i = 0; i < currentMap.Length; i++)
+                    {
+                        currentMap[i].SetActive(false);
+                    }
 
                 }
                 if(temple == true)
@@ -44,15 +50,29 @@ public class RoomChange : MonoBehaviour
                         collision.gameObject.GetComponent<Flashlight>().isDark = true;
                         collision.gameObject.GetComponent<Flashlight>().haveFlashlight = true;
                         outside = true;
-                        targetMap.SetActive(true);
-                        currentMap.SetActive(false);
+                        outside = true;
+                        for (int i = 0; i < targetMap.Length; i++)
+                        {
+                            targetMap[i].SetActive(true);
+                        }
+                        for (int i = 0; i < currentMap.Length; i++)
+                        {
+                            currentMap[i].SetActive(false);
+                        }
                     }
                     else
                     {
                         collision.gameObject.GetComponent<Flashlight>().isDark = true;
                         outside = true;
-                        targetMap.SetActive(true);
-                        currentMap.SetActive(false);
+                        outside = true;
+                        for (int i = 0; i < targetMap.Length; i++)
+                        {
+                            targetMap[i].SetActive(true);
+                        }
+                        for (int i = 0; i < currentMap.Length; i++)
+                        {
+                            currentMap[i].SetActive(false);
+                        }
 
                     }
                     
@@ -65,8 +85,15 @@ public class RoomChange : MonoBehaviour
                 if(collision.gameObject.GetComponent<Player>().canOpen == true)
                 {
                     outside = true;
-                    targetMap.SetActive(true);
-                    currentMap.SetActive(false);
+                    outside = true;
+                    for (int i = 0; i < targetMap.Length; i++)
+                    {
+                        targetMap[i].SetActive(true);
+                    }
+                    for (int i = 0; i < currentMap.Length; i++)
+                    {
+                        currentMap[i].SetActive(false);
+                    }
                 }
             }
            

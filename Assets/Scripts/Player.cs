@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player instance;
     //Player Stats
+    [Header("Player Stats")]
     public int health = 2;
     public int maxHealth=2;//I think we need max health
     public int dir=6;
@@ -22,15 +24,18 @@ public class Player : MonoBehaviour
     public float moveSpeed;
 
     //Player Ability
+    [Header("Player Abilities")]
     public bool isDead;
     public bool canPush;
     public bool canAttack;
     public bool canWater;
     public bool canOpen;
     public bool canLight;
+    public GameObject[] flashlight;
     public List<ItemInfo> inventory = new List<ItemInfo>();
 
     //Transform or etc related to player
+    [Header("Miscellaneous")]
     public GameObject cam;
     public GameObject[] roomsActive;
     public GameObject[] roomsInactive;
@@ -43,6 +48,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         raycastLayers = new string[] { "Blocking", "Actor", "Water" };
         raycastMask = LayerMask.GetMask(raycastLayers);
     }
@@ -50,12 +56,19 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(health<=0)
+        {
+            isDead = true;
+        }
+
         if(isDead)
         {
             canMove = false;
+            GetComponent<BoxCollider2D>().enabled = false;
             animator.SetBool("isDead", true);
             if (Input.GetKeyDown(KeyCode.X))
             {
+                //Reset Rooms
                 for(int i = 0; i < roomsActive.Length; i++)
                 {
                     roomsActive[i].gameObject.SetActive(true);
@@ -64,17 +77,36 @@ public class Player : MonoBehaviour
                 {
                     roomsInactive[i].gameObject.SetActive(false);
                 }
+                //Reset Objects
+                GameObject[] respawnables = GameObject.FindGameObjectsWithTag("Respawnable");
+                for (int i = 0; i <respawnables.Length; i++)
+                {
+                    respawnables[i].GetComponent<Breakable>().health = 1;
+                    respawnables[i].GetComponent<SpriteRenderer>().sprite = respawnables[i].GetComponent<Breakable>().baseSprite;
+                    respawnables[i].GetComponent<BoxCollider2D>().enabled = true;
+                }
+                //Reset Player
+                health = maxHealth;
                 transform.position = new Vector3(3, -1.35f, 0);
                 cam.transform.position = new Vector3(0, -0.5f, -10);
-                timer.GetComponent<Timer>().timerStarted = true;
-                timer.GetComponent<Timer>().currentTime = timer.GetComponent<Timer>().startTime;
                 canMove = true;
                 animator.SetBool("isDead", false);
+                GetComponent<BoxCollider2D>().enabled = true;
+                for(int i =0; i < flashlight.Length; i++)
+                {
+                    flashlight[i].SetActive(false);
+                }
+
+                //Reset Timer
+                timer.GetComponent<Timer>().timerStarted = true;
+                timer.GetComponent<Timer>().currentTime = timer.GetComponent<Timer>().startTime;
+
+
                 isDead = false;
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.C) && canAttack)
+        if(Input.GetKeyDown(KeyCode.C) && !isDead)
         {
             timer.GetComponent<AudioSource>().Play();
             timer.GetComponent<Timer>().timerStarted = false;
