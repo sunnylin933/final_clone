@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public int maxHealth=2;//I think we need max health
     public int dir=6;
     public int face = 2;//1L 2R
+    public GameObject flashlight;
 
 
     //Player Animation
@@ -31,7 +32,7 @@ public class Player : MonoBehaviour
     public bool canWater;
     public bool canOpen;
     public bool canLight;
-    public GameObject[] flashlight;
+ 
     public List<ItemInfo> inventory = new List<ItemInfo>();
 
     //Transform or etc related to player
@@ -91,11 +92,9 @@ public class Player : MonoBehaviour
                 cam.transform.position = new Vector3(0, -0.5f, -10);
                 canMove = true;
                 animator.SetBool("isDead", false);
+                flashlight.SetActive(false);
                 GetComponent<BoxCollider2D>().enabled = true;
-                for(int i =0; i < flashlight.Length; i++)
-                {
-                    flashlight[i].SetActive(false);
-                }
+            
 
                 //Reset Timer
                 timer.GetComponent<Timer>().timerStarted = true;

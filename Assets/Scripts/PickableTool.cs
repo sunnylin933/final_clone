@@ -6,6 +6,7 @@ public class PickableTool : MonoBehaviour
 {
     ToolManager manager;
     Player player;
+    float pickupTime = 1f;
     public enum Tools
     {
         Sword,
@@ -18,12 +19,17 @@ public class PickableTool : MonoBehaviour
     void Start()
     {
         manager = GameObject.Find("PickingToolManager").GetComponent<ToolManager>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        pickupTime -= Time.deltaTime;
+        if(pickupTime < 0)
+        {
+            this.GetComponent<BoxCollider2D>().enabled = true;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

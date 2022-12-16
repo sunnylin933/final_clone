@@ -9,6 +9,7 @@ public class ToolManager : MonoBehaviour
     Player player;
     public Player_UsingHoldItem holdItem;
     public int savePointID = 0;
+    public Transform spawnPosition;
     void Start()
     {
         player = p.GetComponent<Player>();
@@ -80,14 +81,14 @@ public class ToolManager : MonoBehaviour
                     case ToolManagerObject.tags.Sword:
                         if (player.canAttack)
                         {
-                            Instantiate(obj.pickableObject, p.transform.position+pos, Quaternion.identity);
+                            Instantiate(obj.pickableObject, spawnPosition.position, Quaternion.identity);
                         }
                         break;
 
                     case ToolManagerObject.tags.WateringCan:
                         if (player.canWater)
                         {
-                            Instantiate(obj.pickableObject, p.transform.position+pos, Quaternion.identity);
+                            Instantiate(obj.pickableObject, spawnPosition.position, Quaternion.identity);
                         }
                         break;
                 }
