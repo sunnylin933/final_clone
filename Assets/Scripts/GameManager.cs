@@ -6,8 +6,9 @@ public class GameManager : MonoBehaviour
 {
 
     public static int gameState = -1;
-    public static int crab;
+    public static int crab = 0;
     public Timer timer;
+    public Player player;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
         {
             gameState = 1;
             Debug.Log(gameState);
+            player.canPush = true;
         }
         
     }

@@ -46,7 +46,7 @@ public class NPC : MonoBehaviour
             {
                 typing = true;
                 dialoguePanel.SetActive(true);
-                dialoguePanel.transform.position = new Vector3(dialoguePosition.position.x, dialoguePosition.position.y, -1000);
+                dialoguePanel.transform.position = new Vector3(dialoguePosition.position.x, dialoguePosition.position.y, 0);
                    
                 StartCoroutine(Typing());
             }
