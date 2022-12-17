@@ -14,6 +14,7 @@ public class Timer : MonoBehaviour
     public GameObject timer;
     public TMP_Text timerText;
     public GameObject player;
+    public GameObject respawnUI;
 
     public int date;
 

@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public int dir=6;
     public int face = 2;//1L 2R
     public GameObject flashlight;
+    public GameObject ui;
 
 
     //Player Animation
@@ -64,11 +65,13 @@ public class Player : MonoBehaviour
 
         if(isDead)
         {
+            ui.SetActive(true);
             canMove = false;
             GetComponent<BoxCollider2D>().enabled = false;
             animator.SetBool("isDead", true);
             if (Input.GetKeyDown(KeyCode.X))
             {
+                ui.SetActive(false);
                 //Reset Rooms
                 for(int i = 0; i < roomsActive.Length; i++)
                 {
